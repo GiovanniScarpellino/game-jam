@@ -18,6 +18,8 @@ public class DebutPartie : MonoBehaviour {
 
 	[Header("Choix du camp")]
 	public GameObject prefabCamp; //Prefab du camp a poser
+	public GameObject uniteBlanche; //Unite blanche
+	public string nomGameObjectPlacementBatiment;
 	private GameObject campAPoser; //Camp actuellement en main
 
 	[Header("Deplacement caméra")]
@@ -68,8 +70,15 @@ public class DebutPartie : MonoBehaviour {
 				positionCamp.x = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + .5f);
 				positionCamp.y = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).y + .5f);
 				if (!Input.GetMouseButtonDown(0)) {
-					if (campAPoser == null)
+					if (campAPoser == null) {
 						campAPoser = Instantiate(prefabCamp);
+						GameObject placementBatiment = Instantiate(uniteBlanche);
+						placementBatiment.name = nomGameObjectPlacementBatiment;
+						placementBatiment.transform.parent = campAPoser.transform;
+						placementBatiment.transform.localScale = new Vector3(.96f, .92f, 1);
+						placementBatiment.transform.position = campAPoser.transform.position;
+						placementBatiment.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, .4f);
+					}
 					campAPoser.transform.position = positionCamp;
 					//Coloration du camp pour une position disponible
 					bool positionValide = true;
@@ -92,6 +101,7 @@ public class DebutPartie : MonoBehaviour {
 					for (int y = debutYCamp; y <= finYCamp; y++) {
 						for (int x = debutXCamp; x <= finXCamp; x++) {
 							//Verification des tuiles autours du camp
+							//Si c'est de l'eau ou en dehors de la carte la position n'est plus valide
 							try {
 								if (mapGenerator.tuilesMap[(int) positionCamp.y + y, (int) positionCamp.x + x] == MapGenerator.TypeTuile.Eau)
 									positionValide = false;
@@ -102,7 +112,11 @@ public class DebutPartie : MonoBehaviour {
 						}
 					}
 					if (positionValide) {
+						//Détruit les arbres autours
 						campAPoser.transform.Find("ColliderPoseCamp").GetComponent<BoxCollider2D>().enabled = true;
+						//Enlève la zone noir de visualisation de placement
+						Destroy(campAPoser.transform.Find(nomGameObjectPlacementBatiment).gameObject);
+						//Passe au prochain état du début de partie : Le zoom qui recentre sur le camp
 						etatDebutPartie = EtatDebutPartie.Zoom;
 					}
 				}

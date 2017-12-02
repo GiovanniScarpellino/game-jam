@@ -33,12 +33,16 @@ public class MapGenerator : MonoBehaviour {
 	public GameObject prefabArbre;
 
 	//Parent des tuiles
-	private Transform parentTuiles;
+	private Transform parentSol;
+	private Transform parentArbres;
 
 	private void Start() { //Utilise Update pour une mise a jour en temps réel
-		if(parentTuiles != null)
-			Destroy(parentTuiles.gameObject);
-		parentTuiles = new GameObject("Parent des tuiles").transform;
+		if(parentSol != null)
+			Destroy(parentSol.gameObject);
+		parentSol = new GameObject("Parent du sol").transform;
+		if(parentArbres != null)
+			Destroy(parentArbres.gameObject);
+		parentArbres = new GameObject("Parent des arbres").transform;
 
 		seed = Random.Range(0, 999999);
 		
@@ -68,7 +72,7 @@ public class MapGenerator : MonoBehaviour {
 				else
 					nouvelleTuile = Instantiate(prefabHerbe);
 				nouvelleTuile.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);
-				nouvelleTuile.transform.parent = parentTuiles;
+				nouvelleTuile.transform.parent = parentSol;
 				
 				//Instantiation des arbres
 				if (valeurPerlin >= valeurMaxEau) {
@@ -76,7 +80,7 @@ public class MapGenerator : MonoBehaviour {
 					if (Random.Range(0f, 1f) < valeurMaxArbre) {
 						GameObject nouvelArbre = Instantiate(prefabArbre);
 						nouvelArbre.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);
-						nouvelArbre.transform.parent = parentTuiles;
+						nouvelArbre.transform.parent = parentArbres;
 					}
 				}
 			}

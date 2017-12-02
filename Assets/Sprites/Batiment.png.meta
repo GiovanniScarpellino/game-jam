@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a1f5b028b9a0bd94eb1e53b04233f908
-timeCreated: 1512178070
+timeCreated: 1512233817
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -18,6 +18,7 @@ TextureImporter:
     21300022: Batiment_37
     21300024: Batiment_38
     21300026: Batiment_49
+    21300028: Camp
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -136,6 +137,20 @@ TextureImporter:
         height: 63
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Camp
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 7
+        width: 96
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

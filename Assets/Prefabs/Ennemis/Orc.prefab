@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4147592656224328}
   - component: {fileID: 58955119210917434}
+  - component: {fileID: 114903022872259018}
   m_Layer: 0
   m_Name: Vision
   m_TagString: Untagged
@@ -64,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1925953100899926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.62, y: -0.34, z: 0}
+  m_LocalPosition: {x: 0.24, y: -0.34, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4147592656224328}
@@ -101,6 +102,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &114903022872259018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1306716708554796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6875cf203c910645b9db53619939f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212755531255295046
 SpriteRenderer:
   m_ObjectHideFlags: 1

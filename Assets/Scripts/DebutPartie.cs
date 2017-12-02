@@ -13,8 +13,10 @@ public class DebutPartie : MonoBehaviour {
 	[Header("Zoom")]
 	public float dezoomMax; //Zoom maximal sur la carte
 	private float startZoom; //Zoom initial
-	private float etatDezoom; //Stade des zoom dans la fonction Sigmoid (de -1 à 1)
-	public float incrementationDezoom; //Vitesse de la fonction Sigmoid
+	private float etatDezoom; //Stade du dezoom dans la fonction Sigmoid (de -1 à 1)
+	private float etatZoom; //Stade du zoom dans la fonction Sigmoid (de -1 à 1)
+	public float incrementationZooms; //Vitesse de la fonction Sigmoid
+	private Vector2 startZoomCameraPosition; //Position du zoom au début (Nécessaire pour le dernier zoom)
 
 	[Header("Choix du camp")]
 	public GameObject prefabCamp; //Prefab du camp a poser
@@ -43,6 +45,7 @@ public class DebutPartie : MonoBehaviour {
 		startZoom = Camera.main.orthographicSize;
 		etatDebutPartie = EtatDebutPartie.Dezoom;
 		etatDezoom = -1;
+		etatZoom = -1;
 
 		mapGenerator = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>();
 		nombreTuilesX = mapGenerator.largeur;
@@ -55,7 +58,7 @@ public class DebutPartie : MonoBehaviour {
 			//Dezoom général
 			case EtatDebutPartie.Dezoom:
 				float valeurIncrementationDezoom = sigmoid(etatDezoom);
-				etatDezoom += incrementationDezoom * Time.deltaTime;
+				etatDezoom += incrementationZooms * Time.deltaTime;
 				if (etatDezoom >= 1) {
 					Camera.main.orthographicSize = dezoomMax;
 					etatDebutPartie = EtatDebutPartie.ChoixCamp;
@@ -121,8 +124,25 @@ public class DebutPartie : MonoBehaviour {
 					}
 				}
 				break;
+			//Zoom sur la cabane finale
+			case EtatDebutPartie.Zoom:
+				float valeurIncrementationZoom = sigmoid(etatZoom);
+				etatZoom += incrementationZooms * Time.deltaTime;
+				if (etatZoom >= 1) {
+					Camera.main.orthographicSize = startZoom;
+					Camera.main.transform.position = new Vector3(campAPoser.transform.position.x, campAPoser.transform.position.y, -10);
+				}
+				else {
+					Camera.main.orthographicSize = dezoomMax - ((dezoomMax - startZoom) * valeurIncrementationZoom);
+					Camera.main.transform.position = new Vector3(
+						startZoomCameraPosition.x + ((campAPoser.transform.position.x - startZoomCameraPosition.x) * valeurIncrementationZoom),
+						startZoomCameraPosition.y + ((campAPoser.transform.position.y - startZoomCameraPosition.y) * valeurIncrementationZoom),
+						-10
+					);
+				}
+				break;
 		}
-
+		//Deplacement de la camera dans le placement du camp
 		if (etatDebutPartie == EtatDebutPartie.ChoixCamp) {
 			Vector2 positionSouris = Input.mousePosition;
 			Vector3 positionCamera = Camera.main.transform.position;
@@ -135,6 +155,7 @@ public class DebutPartie : MonoBehaviour {
 			if (positionSouris.y >= Screen.height && Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height)).y <= nombreTuilesY - offsetLimitesCamera.y)
 				positionCamera.y += vitesseCamera * Time.deltaTime;
 			Camera.main.transform.position = positionCamera;
+			startZoomCameraPosition = positionCamera;
 		}
 	}
 

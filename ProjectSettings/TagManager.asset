@@ -58,6 +58,9 @@ TagManager:
   - name: Arbre
     uniqueID: 1336239965
     locked: 0
+  - name: PlacementBatiment
+    uniqueID: 1422236341
+    locked: 0
   - name: Batiments
     uniqueID: 1418758453
     locked: 0

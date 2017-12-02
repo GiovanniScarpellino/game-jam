@@ -49,6 +49,7 @@ public class MapGenerator : MonoBehaviour {
 		Random.InitState(seed);
 		
 		genererMap();
+		Camera.main.transform.position = new Vector3(largeur / 2f, hauteur / 2f, -10);
 	}
 
 	public void genererMap() {

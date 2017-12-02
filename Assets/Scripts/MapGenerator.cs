@@ -5,7 +5,6 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour {
-
 	[Serializable]
 	public class Count {
 		public int minimum;
@@ -21,22 +20,23 @@ public class MapGenerator : MonoBehaviour {
 	//Données de la génération
 	public int largeur;
 	public int hauteur;
-	public Count nombreDeMurs;
-	public Count nombreDeRivieres;
-	
+	public int seed;
+	public float scale;
+
 	[Space]
 	[Header("Tuiles")]
 	//Tuiles utilisées
 	public float tailleTuile;
-	public GameObject[] tuilesSol;
-	public GameObject[] tuilesMur;
-	public GameObject[] tuilesBordure;
-	public GameObject[] tuilesEau;
+	public GameObject prefabTerre;
+	public GameObject prefabHerbe;
+	public GameObject prefabEau;
 
 	//Parent des tuiles
 	private Transform parentTuiles;
 
-	private void Start() {
+	private void Start() { //Utilise Update pour une mise a jour en temps réel
+		if(parentTuiles != null)
+			Destroy(parentTuiles.gameObject);
 		parentTuiles = new GameObject("Parent des tuiles").transform;
 		
 		genererMap();
@@ -45,9 +45,18 @@ public class MapGenerator : MonoBehaviour {
 	public void genererMap() {
 		for (int y = 0; y < hauteur; y++) {
 			for (int x = 0; x < largeur; x++) {
-				GameObject tuileSol = (GameObject) Instantiate(tuilesSol[Random.Range(0, tuilesSol.Length)]);
-				tuileSol.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);
-				tuileSol.transform.parent = parentTuiles;
+				float xCoord = ((float) x + seed) / largeur * scale ;
+				float yCoord = ((float) y + seed) / hauteur * scale;
+				float valeurPerlin = Mathf.PerlinNoise(xCoord, yCoord);
+				GameObject nouvelleTuile;
+				if(valeurPerlin < .2f)
+					nouvelleTuile = Instantiate(prefabEau);
+				else if (valeurPerlin < .45f)
+					nouvelleTuile = Instantiate(prefabTerre);
+				else
+					nouvelleTuile = Instantiate(prefabHerbe);
+				nouvelleTuile.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);
+				nouvelleTuile.transform.parent = parentTuiles;
 			}
 		}
 	}

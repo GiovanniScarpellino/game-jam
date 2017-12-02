@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 72fc5d88e27f9ad4f8f809459b84bcda
-timeCreated: 1512181265
+timeCreated: 1512181482
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -11,6 +11,7 @@ TextureImporter:
     21300008: MurailleAngle
     21300010: MurailleFinV
     21300012: Eau
+    21300014: Herbe
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -128,20 +129,6 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Herbe
-      rect:
-        serializedVersion: 2
-        x: 330
-        y: 231
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
       name: MurailleH
       rect:
         serializedVersion: 2
@@ -206,7 +193,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Herbe
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 33
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

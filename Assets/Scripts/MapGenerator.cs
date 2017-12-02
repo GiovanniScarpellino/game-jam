@@ -30,6 +30,7 @@ public class MapGenerator : MonoBehaviour {
 	public GameObject prefabTerre;
 	public GameObject prefabHerbe;
 	public GameObject prefabEau;
+	public GameObject prefabArbre;
 
 	//Parent des tuiles
 	private Transform parentTuiles;
@@ -39,24 +40,43 @@ public class MapGenerator : MonoBehaviour {
 			Destroy(parentTuiles.gameObject);
 		parentTuiles = new GameObject("Parent des tuiles").transform;
 		
+		Random.InitState(seed);
+		
 		genererMap();
 	}
 
 	public void genererMap() {
 		for (int y = 0; y < hauteur; y++) {
 			for (int x = 0; x < largeur; x++) {
+				//Valeurs pour la génération
+				float valeurMaxEau = .2f;
+				float valeurMaxTerre = .45f;
+				
+				//Récupération de la valeur aléatoire
 				float xCoord = ((float) x + seed) / largeur * scale ;
 				float yCoord = ((float) y + seed) / hauteur * scale;
 				float valeurPerlin = Mathf.PerlinNoise(xCoord, yCoord);
+				
+				//Instantiation de la tuile du sol
 				GameObject nouvelleTuile;
-				if(valeurPerlin < .2f)
+				if(valeurPerlin < valeurMaxEau)
 					nouvelleTuile = Instantiate(prefabEau);
-				else if (valeurPerlin < .45f)
+				else if (valeurPerlin < valeurMaxTerre)
 					nouvelleTuile = Instantiate(prefabTerre);
 				else
 					nouvelleTuile = Instantiate(prefabHerbe);
 				nouvelleTuile.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);
 				nouvelleTuile.transform.parent = parentTuiles;
+				
+				//Instantiation des arbres
+				if (valeurPerlin >= valeurMaxEau) {
+					float valeurMaxArbre = .3f;
+					if (Random.Range(0f, 1f) < valeurMaxArbre) {
+						GameObject nouvelArbre = Instantiate(prefabArbre);
+						nouvelArbre.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);
+						nouvelArbre.transform.parent = parentTuiles;
+					}
+				}
 			}
 		}
 	}

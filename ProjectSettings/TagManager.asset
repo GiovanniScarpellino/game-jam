@@ -41,3 +41,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Terre
+    uniqueID: 4275025897
+    locked: 0
+  - name: Herbe
+    uniqueID: 2865230053
+    locked: 0
+  - name: Eau
+    uniqueID: 2702606523
+    locked: 0
+  - name: Arbre
+    uniqueID: 1336239965
+    locked: 0
+  - name: Batiments
+    uniqueID: 1418758453
+    locked: 0
+  - name: Muraille
+    uniqueID: 3631202257
+    locked: 0
+  - name: Joueur
+    uniqueID: 1856421391
+    locked: 0

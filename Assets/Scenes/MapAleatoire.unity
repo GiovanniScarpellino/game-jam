@@ -277,8 +277,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dezoomMax: 13
-  incrementationDezoom: 0.5
+  incrementationZooms: 0.6
   prefabCamp: {fileID: 1651711758841754, guid: 2bd007ada6f767442a105eb138d0f5c4, type: 2}
+  uniteBlanche: {fileID: 1040504139527902, guid: eddc662a540ebf3479d92b446f94d9c6,
+    type: 2}
+  nomGameObjectPlacementBatiment: Placement Batiment
   vitesseCamera: 15
   nombreTuilesX: 0
   nombreTuilesY: 0

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 72fc5d88e27f9ad4f8f809459b84bcda
-timeCreated: 1512180650
+timeCreated: 1512181265
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -10,6 +10,7 @@ TextureImporter:
     21300006: MurailleFinH
     21300008: MurailleAngle
     21300010: MurailleFinV
+    21300012: Eau
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -184,6 +185,20 @@ TextureImporter:
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Eau
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 132
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

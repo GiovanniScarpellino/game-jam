@@ -51,8 +51,8 @@ public class MapGenerator : MonoBehaviour {
 		for (int y = 0; y < hauteur; y++) {
 			for (int x = 0; x < largeur; x++) {
 				//Valeurs pour la génération
-				float valeurMaxEau = .275f;
-				float valeurMaxTerre = .45f;
+				float valeurMaxEau = .35f;
+				float valeurMaxTerre = .55f;
 				
 				//Récupération de la valeur aléatoire
 				float xCoord = ((float) x + seed) / largeur * scale ;
@@ -72,7 +72,7 @@ public class MapGenerator : MonoBehaviour {
 				
 				//Instantiation des arbres
 				if (valeurPerlin >= valeurMaxEau) {
-					float valeurMaxArbre = .4f;
+					float valeurMaxArbre = .3f;
 					if (Random.Range(0f, 1f) < valeurMaxArbre) {
 						GameObject nouvelArbre = Instantiate(prefabArbre);
 						nouvelArbre.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);

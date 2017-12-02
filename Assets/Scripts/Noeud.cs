@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Net;
 using UnityEngine;
 
-public class Noeud : MonoBehaviour
+public class Noeud
 {
 	public bool walkable; 
 	public Vector3 position; //position dans unity de notre tuile.
@@ -20,10 +22,10 @@ public class Noeud : MonoBehaviour
 		this.grilleX = grilleX;
 		this.grilleY = grilleY;
 	}
-	
-	
-	public int fCost()
-	{
+
+
+	public int fCost() {
 		return gCost + hCost;
 	}
 }
+

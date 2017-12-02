@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VisionEnnemi : MonoBehaviour {
+public class VisionEnnemi : MonoBehaviour{
+    public float speed;
+    public Transform target;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private void Update(){
+        var step = speed * Time.deltaTime;
+        transform.parent.position = Vector3.MoveTowards(transform.parent.position, target.position, step);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other){
+        if (other.CompareTag("Player")){
+            GetComponentInParent<Animator>().SetTrigger("DiagoBas");
+            target = other.transform;
+        }
+    }
 }

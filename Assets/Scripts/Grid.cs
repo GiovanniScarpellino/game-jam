@@ -22,7 +22,7 @@ public class Grid : MonoBehaviour {
     private float diametreNoeud;
     public float rayonNoeud;
     public LayerMask impossibleMarcherMasque; //layer où se trouve les cubes représentant les obstacles
-    public List<Noeud> chemin; //Le chemin déterminé par l'algorithme     A*
+    public List<Noeud> chemin; //Le chemin déterminé par l'algorithme A*
 
     private void Start() {
         diametreNoeud = rayonNoeud * 2;
@@ -30,6 +30,7 @@ public class Grid : MonoBehaviour {
         dimensionGrilleY = Mathf.RoundToInt(dimensionMonde.y / diametreNoeud);
 
         construireGrille();
+        print("J'ai construit la grille !");
     }
 
     private void construireGrille() {
@@ -108,6 +109,14 @@ public class Grid : MonoBehaviour {
             }
         }
         return voisins;
+    }
+
+    public Noeud[,] getGrille() {
+        return grille;
+    }
+
+    public List<Noeud> getChemin() {
+        return chemin;
     }
 
 }

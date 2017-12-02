@@ -8,6 +8,7 @@ TagManager:
   - MapGenerator
   - Arbre
   - Camp
+  - Eau
   layers:
   - Default
   - TransparentFX

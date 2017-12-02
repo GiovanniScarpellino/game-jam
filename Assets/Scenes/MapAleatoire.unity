@@ -283,8 +283,6 @@ MonoBehaviour:
   nombreTuilesX: 0
   nombreTuilesY: 0
   offsetLimitesCamera: {x: 0.5, y: 0.4}
-  colliderPoseCamp: {fileID: 1796643565092384, guid: 2bd007ada6f767442a105eb138d0f5c4,
-    type: 2}
 --- !u!4 &1303378545
 Transform:
   m_ObjectHideFlags: 0

@@ -31,10 +31,10 @@ public class DebutPartie : MonoBehaviour {
 	private MapGenerator mapGenerator; //Instance de la map generator
 	
 	//Zone autour du camp
-	private int debutXCamp = -2;
-	private int finXCamp = 2;
-	private int debutYCamp = -2;
-	private int finYCamp = 2;
+	private int debutXCamp = -1;
+	private int finXCamp = 1;
+	private int debutYCamp = -1;
+	private int finYCamp = 1;
 
 	// Use this for initialization
 	void Start() {
@@ -71,6 +71,21 @@ public class DebutPartie : MonoBehaviour {
 					if (campAPoser == null)
 						campAPoser = Instantiate(prefabCamp);
 					campAPoser.transform.position = positionCamp;
+					//Coloration du camp pour une position disponible
+					bool positionValide = true;
+					for (int y = debutYCamp; y <= finYCamp; y++) {
+						for (int x = debutXCamp; x <= finXCamp; x++) {
+							//Verification des tuiles autours du camp
+							try {
+								if (mapGenerator.tuilesMap[(int) positionCamp.y + y, (int) positionCamp.x + x] == MapGenerator.TypeTuile.Eau)
+									positionValide = false;
+							}
+							catch (IndexOutOfRangeException exception) {
+								positionValide = false;
+							}
+						}
+					}
+					campAPoser.GetComponent<SpriteRenderer>().color = positionValide ? Color.white : Color.red;
 				}
 				else {
 					bool positionValide = true;
@@ -86,7 +101,6 @@ public class DebutPartie : MonoBehaviour {
 							}
 						}
 					}
-					print(positionValide);
 					if (positionValide) {
 						campAPoser.transform.Find("ColliderPoseCamp").GetComponent<BoxCollider2D>().enabled = true;
 						etatDebutPartie = EtatDebutPartie.Zoom;

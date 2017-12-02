@@ -26,7 +26,15 @@ public class DebutPartie : MonoBehaviour {
 	public int nombreTuilesY;
 	public Vector2 offsetLimitesCamera; //Offset de la limite du déplacement de la caméra
 
-	private EtatDebutPartie etatDebutPartie;
+	private EtatDebutPartie etatDebutPartie; //Etat du début de la partie (Dezoom, choix de l'emplacement du camp, zoom)
+
+	private MapGenerator mapGenerator; //Instance de la map generator
+	
+	//Zone autour du camp
+	private int debutXCamp = -2;
+	private int finXCamp = 2;
+	private int debutYCamp = -2;
+	private int finYCamp = 2;
 
 	// Use this for initialization
 	void Start() {
@@ -34,7 +42,7 @@ public class DebutPartie : MonoBehaviour {
 		etatDebutPartie = EtatDebutPartie.Dezoom;
 		etatDezoom = -1;
 
-		MapGenerator mapGenerator = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>();
+		mapGenerator = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>();
 		nombreTuilesX = mapGenerator.largeur;
 		nombreTuilesY = mapGenerator.hauteur;
 	}
@@ -42,6 +50,7 @@ public class DebutPartie : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		switch (etatDebutPartie) {
+			//Dezoom général
 			case EtatDebutPartie.Dezoom:
 				float valeurIncrementationDezoom = sigmoid(etatDezoom);
 				etatDezoom += incrementationDezoom * Time.deltaTime;
@@ -53,13 +62,36 @@ public class DebutPartie : MonoBehaviour {
 					Camera.main.orthographicSize = startZoom + ((dezoomMax - startZoom) * valeurIncrementationDezoom);
 				}
 				break;
+			//Choix de la position du camp
 			case EtatDebutPartie.ChoixCamp:
-				if (campAPoser == null)
-					campAPoser = Instantiate(prefabCamp);
 				Vector2 positionCamp = new Vector2();
-				positionCamp.x = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
-				positionCamp.y = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-				campAPoser.transform.position = positionCamp;
+				positionCamp.x = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + .5f);
+				positionCamp.y = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).y + .5f);
+				if (!Input.GetMouseButtonDown(0)) {
+					if (campAPoser == null)
+						campAPoser = Instantiate(prefabCamp);
+					campAPoser.transform.position = positionCamp;
+				}
+				else {
+					bool positionValide = true;
+					for (int y = debutYCamp; y <= finYCamp; y++) {
+						for (int x = debutXCamp; x <= finXCamp; x++) {
+							//Verification des tuiles autours du camp
+							try {
+								if (mapGenerator.tuilesMap[(int) positionCamp.y + y, (int) positionCamp.x + x] == MapGenerator.TypeTuile.Eau)
+									positionValide = false;
+							}
+							catch (IndexOutOfRangeException exception) {
+								positionValide = false;
+							}
+						}
+					}
+					print(positionValide);
+					if (positionValide) {
+						campAPoser.transform.Find("ColliderPoseCamp").GetComponent<BoxCollider2D>().enabled = true;
+						etatDebutPartie = EtatDebutPartie.Zoom;
+					}
+				}
 				break;
 		}
 

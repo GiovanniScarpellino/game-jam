@@ -39,6 +39,8 @@ public class MapGenerator : MonoBehaviour {
 		if(parentTuiles != null)
 			Destroy(parentTuiles.gameObject);
 		parentTuiles = new GameObject("Parent des tuiles").transform;
+
+		seed = Random.Range(0, 999999);
 		
 		Random.InitState(seed);
 		
@@ -49,7 +51,7 @@ public class MapGenerator : MonoBehaviour {
 		for (int y = 0; y < hauteur; y++) {
 			for (int x = 0; x < largeur; x++) {
 				//Valeurs pour la génération
-				float valeurMaxEau = .2f;
+				float valeurMaxEau = .275f;
 				float valeurMaxTerre = .45f;
 				
 				//Récupération de la valeur aléatoire
@@ -70,7 +72,7 @@ public class MapGenerator : MonoBehaviour {
 				
 				//Instantiation des arbres
 				if (valeurPerlin >= valeurMaxEau) {
-					float valeurMaxArbre = .3f;
+					float valeurMaxArbre = .4f;
 					if (Random.Range(0f, 1f) < valeurMaxArbre) {
 						GameObject nouvelArbre = Instantiate(prefabArbre);
 						nouvelArbre.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);

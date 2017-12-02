@@ -16,6 +16,12 @@ public class MapGenerator : MonoBehaviour {
 		}
 	}
 
+	public enum TypeTuile {
+		Eau,
+		Terre,
+		Herbe
+	}
+
 	[Header("Génération")]
 	//Données de la génération
 	public int largeur;
@@ -36,6 +42,8 @@ public class MapGenerator : MonoBehaviour {
 	private Transform parentSol;
 	private Transform parentArbres;
 
+	public TypeTuile[,] tuilesMap { get; private set; }
+
 	private void Start() { //Utilise Update pour une mise a jour en temps réel
 		if(parentSol != null)
 			Destroy(parentSol.gameObject);
@@ -45,9 +53,9 @@ public class MapGenerator : MonoBehaviour {
 		parentArbres = new GameObject("Parent des arbres").transform;
 
 		seed = Random.Range(0, 999999);
-		
 		Random.InitState(seed);
 		
+		tuilesMap = new TypeTuile[hauteur, largeur];
 		genererMap();
 		Camera.main.transform.position = new Vector3(largeur / 2f, hauteur / 2f, -10);
 	}
@@ -66,12 +74,18 @@ public class MapGenerator : MonoBehaviour {
 				
 				//Instantiation de la tuile du sol
 				GameObject nouvelleTuile;
-				if(valeurPerlin < valeurMaxEau)
+				if (valeurPerlin < valeurMaxEau) {
 					nouvelleTuile = Instantiate(prefabEau);
-				else if (valeurPerlin < valeurMaxTerre)
+					tuilesMap[y, x] = TypeTuile.Eau;
+				}
+				else if (valeurPerlin < valeurMaxTerre) {
 					nouvelleTuile = Instantiate(prefabTerre);
-				else
+					tuilesMap[y, x] = TypeTuile.Terre;
+				}
+				else {
 					nouvelleTuile = Instantiate(prefabHerbe);
+					tuilesMap[y, x] = TypeTuile.Herbe;
+				}
 				nouvelleTuile.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);
 				nouvelleTuile.transform.parent = parentSol;
 				

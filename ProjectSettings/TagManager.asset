@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ennemi
+  - MapGenerator
+  - Arbre
+  - Camp
   layers:
   - Default
   - TransparentFX

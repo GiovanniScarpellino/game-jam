@@ -1,9 +1,34 @@
 fileFormatVersion: 2
 guid: 1ff342bb66637334093dcabbf9731589
-timeCreated: 1512176405
+timeCreated: 1512182027
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: PersonnagePrincipaleMarcheHaut1
+    21300002: PersonnagePrincipaleMarcheHaut2
+    21300004: PersonnagePrincipaleMarcheHaut3
+    21300006: PersonnagePrincipaleMarcheHaut4
+    21300008: PersonnagePrincipaleMarcheHaut5
+    21300010: PersonnagePrincipaleMarcheDiagoHaut1
+    21300012: PersonnagePrincipaleMarcheDiagoHaut2
+    21300014: PersonnagePrincipaleMarcheDiagoHaut3
+    21300016: PersonnagePrincipaleMarcheDiagoHaut4
+    21300018: PersonnagePrincipaleMarcheDiagoHaut5
+    21300020: PersonnagePrincipaleMarcheDroite1
+    21300022: PersonnagePrincipaleMarcheDroite2
+    21300024: PersonnagePrincipaleMarcheDroite3
+    21300026: PersonnagePrincipaleMarcheDroite4
+    21300028: PersonnagePrincipaleMarcheDroite5
+    21300030: PersonnagePrincipaleMarcheDiagoBas1
+    21300032: PersonnagePrincipaleMarcheDiagoBas2
+    21300034: PersonnagePrincipaleMarcheDiagoBas3
+    21300036: PersonnagePrincipaleMarcheDiagoBas4
+    21300038: PersonnagePrincipaleMarcheDiagoBas5
+    21300040: PersonnagePrincipaleMarcheBas1
+    21300042: PersonnagePrincipaleMarcheBas2
+    21300044: PersonnagePrincipaleMarcheBas3
+    21300046: PersonnagePrincipaleMarcheBas4
+    21300048: PersonnagePrincipaleMarcheBas5
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -39,7 +64,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -63,9 +88,391 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Samsung TV
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheHaut1
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 574
+        width: 31
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheHaut2
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 510
+        width: 30
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheHaut3
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 456
+        width: 30
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheHaut4
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 405
+        width: 29
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheHaut5
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 357
+        width: 31
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDiagoHaut1
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 575
+        width: 25
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDiagoHaut2
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 518
+        width: 39
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDiagoHaut3
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 461
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDiagoHaut4
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 407
+        width: 33
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDiagoHaut5
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 360
+        width: 31
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDroite1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 575
+        width: 32
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDroite2
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 514
+        width: 45
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDroite3
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 459
+        width: 39
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDroite4
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 412
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDroite5
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 364
+        width: 35
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDiagoBas1
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 576
+        width: 40
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDiagoBas2
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 510
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDiagoBas3
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 458
+        width: 41
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDiagoBas4
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 412
+        width: 36
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheDiagoBas5
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 366
+        width: 38
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheBas1
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 566
+        width: 32
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheBas2
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 510
+        width: 29
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheBas3
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 452
+        width: 30
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheBas4
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 404
+        width: 31
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMarcheBas5
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 353
+        width: 32
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 

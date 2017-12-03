@@ -92,7 +92,7 @@ public class DebutPartie : MonoBehaviour {
 								if (mapGenerator.tuilesMap[(int) positionCamp.y + y, (int) positionCamp.x + x] == MapGenerator.TypeTuile.Eau)
 									positionValide = false;
 							}
-							catch (IndexOutOfRangeException exception) {
+							catch (Exception exception) {
 								positionValide = false;
 							}
 						}
@@ -109,7 +109,7 @@ public class DebutPartie : MonoBehaviour {
 								if (mapGenerator.tuilesMap[(int) positionCamp.y + y, (int) positionCamp.x + x] == MapGenerator.TypeTuile.Eau)
 									positionValide = false;
 							}
-							catch (IndexOutOfRangeException exception) {
+							catch (Exception exception) {
 								positionValide = false;
 							}
 						}

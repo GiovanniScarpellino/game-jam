@@ -273,8 +273,6 @@ MonoBehaviour:
     type: 2}
   nomGameObjectPlacementBatiment: Placement Batiment
   vitesseCamera: 15
-  nombreTuilesX: 0
-  nombreTuilesY: 0
   offsetLimitesCamera: {x: 0.5, y: 0.4}
 --- !u!4 &1303378545
 Transform:

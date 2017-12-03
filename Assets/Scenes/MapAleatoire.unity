@@ -153,6 +153,16 @@ Prefab:
       value: 
       objectReference: {fileID: 1040504139527902, guid: eddc662a540ebf3479d92b446f94d9c6,
         type: 2}
+    - target: {fileID: 114719591280243062, guid: 9c35cf29b92f4084895614c066868d35,
+        type: 2}
+      propertyPath: scaleArbre
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114719591280243062, guid: 9c35cf29b92f4084895614c066868d35,
+        type: 2}
+      propertyPath: offsetSeedArbre
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c35cf29b92f4084895614c066868d35, type: 2}
   m_IsPrefabParent: 0
@@ -190,9 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d5d9061844dd3489f176f5734c3025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointDepart: {x: 10, y: 10}
   refuserDiagonalesDansMur: 1
-  uniteBlanc: {fileID: 1040504139527902, guid: eddc662a540ebf3479d92b446f94d9c6, type: 2}
 --- !u!1 &991604147
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,4 +351,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joueur: {fileID: 1155500468480012, guid: 41397fd339011114590aa6b1ed19b72a, type: 2}
-  mapGenerator: {fileID: 952037662}

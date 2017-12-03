@@ -5,13 +5,13 @@ using UnityEngine;
 public class VisionEnnemi : MonoBehaviour{
     private void OnTriggerEnter2D(Collider2D other){
         if (other.CompareTag("Player")){
-            transform.parent.GetComponent<EnnemiController>().target = other.transform;
+            transform.parent.GetComponent<EnnemiController>().targetAnimation = other.transform.position;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other){
         if (other.CompareTag("Player")){
-            transform.parent.GetComponent<EnnemiController>().target = transform.parent.GetComponent<EnnemiController>().camp;
+            transform.parent.GetComponent<EnnemiController>().targetAnimation = transform.parent.GetComponent<EnnemiController>().camp.position;
         }
     }
 }

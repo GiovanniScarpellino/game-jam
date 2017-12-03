@@ -55,6 +55,9 @@ TagManager:
   - name: Eau
     uniqueID: 2702606523
     locked: 0
+  - name: PlacementJoueur
+    uniqueID: 3821141075
+    locked: 0
   - name: Joueur
     uniqueID: 1856421391
     locked: 0

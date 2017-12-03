@@ -328,6 +328,8 @@ GameObject:
   - component: {fileID: 991604148}
   - component: {fileID: 991604153}
   - component: {fileID: 991604154}
+  - component: {fileID: 991604156}
+  - component: {fileID: 991604155}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -376,7 +378,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -417,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vitesseCamera: 20
-  offsetLimitesCamera: {x: 0, y: 0}
+  offsetLimitesCamera: {x: 0.475, y: 0.375}
 --- !u!82 &991604154
 AudioSource:
   m_ObjectHideFlags: 0
@@ -498,6 +500,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &991604155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 991604147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 615d18c18a5997b4597d6694f544d886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &991604156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 991604147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0fed2c66fc3aa48aba1af59e817723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textNombreDeBois: {fileID: 1102070242}
 --- !u!1 &1102070240
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +590,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '
+  m_Text: '0
 
 '
 --- !u!222 &1102070243

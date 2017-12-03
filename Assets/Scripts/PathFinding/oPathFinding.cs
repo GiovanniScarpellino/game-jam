@@ -9,24 +9,25 @@ public class oPathFinding : MonoBehaviour{
 	//Affichage du PathFinding
 	public Vector2 pointDepart;
 	public bool refuserDiagonalesDansMur;
-	public List<Vector2> cheminPF;
 	public GameObject uniteBlanc;
 	private GameObject parentUnites;
 
 	void Awake() {
-		cheminPF = new List<Vector2>();
 		grid = GetComponent<oGrille> ();
 	}
 
 	void Update() {
 		if (grid.grid != null) {
+			//List du PathFinding
+			List<Vector2> cheminPF = new List<Vector2>();
+			
 			//Determination du PF
 			Vector2 positionSouris = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			positionSouris.x = Mathf.Floor(positionSouris.x + 0.5f);
 			positionSouris.y = Mathf.Floor(positionSouris.y + 0.5f);
-			if(positionSouris.x > 0 && positionSouris.x < grid.mapGenerator.largeur &&
-			   positionSouris.y > 0 && positionSouris.y < grid.mapGenerator.hauteur)
-				FindPath (pointDepart, positionSouris);
+			if (positionSouris.x > 0 && positionSouris.x < grid.mapGenerator.largeur &&
+			    positionSouris.y > 0 && positionSouris.y < grid.mapGenerator.hauteur)
+				cheminPF = FindPath(pointDepart, positionSouris);
 
 			//Dessin du PathFinding
 			if (parentUnites != null) {
@@ -41,7 +42,7 @@ public class oPathFinding : MonoBehaviour{
 		}
 	}
 
-	void FindPath(Vector2 startPos, Vector2 targetPos) {
+	List<Vector2> FindPath(Vector2 startPos, Vector2 targetPos) {
 		oNoeud startNode = grid.NodeFromWorldPoint(startPos);
 		oNoeud targetNode = grid.NodeFromWorldPoint(targetPos);
 
@@ -61,13 +62,14 @@ public class oPathFinding : MonoBehaviour{
 			openSet.Remove(node);
 			closedSet.Add(node);
 
+			//Chemin trouvé
 			if (node == targetNode) {
-				List<oNoeud> noeudsChemin = RetracePath(startNode, targetNode);
-				cheminPF = new List<Vector2>();
-				foreach (oNoeud noeud in noeudsChemin) {
-					cheminPF.Add(new Vector2(noeud.gridX, noeud.gridY));
+				List<oNoeud> noeudsCheminFinal = RetracePath(startNode, targetNode);
+				List<Vector2> cheminFinal = new List<Vector2>();
+				foreach (oNoeud noeud in noeudsCheminFinal) {
+					cheminFinal.Add(new Vector2(noeud.gridX, noeud.gridY));
 				}
-				return;
+				return cheminFinal;
 			}
 
 			foreach (oNoeud neighbour in grid.GetNeighbours(node)) {
@@ -95,6 +97,7 @@ public class oPathFinding : MonoBehaviour{
 				}
 			}
 		}
+		return new List<Vector2>();
 	}
 
 	List<oNoeud> RetracePath(oNoeud startNode, oNoeud endNode) {

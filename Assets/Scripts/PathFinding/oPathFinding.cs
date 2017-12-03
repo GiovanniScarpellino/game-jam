@@ -88,4 +88,8 @@ public class oPathFinding : MonoBehaviour{
             return 14 * dstY + 10 * (dstX - dstY);
         return 14 * dstX + 10 * (dstY - dstX);
     }
+    
+    public void definirNoeudMarchable(Vector2 position, bool marchable) {
+        grid.definirNoeudMarchable(position, marchable);
+    }
 }

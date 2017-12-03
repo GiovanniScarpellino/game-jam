@@ -40,4 +40,8 @@ public class oGrille : MonoBehaviour {
 	public oNoeud NodeFromWorldPoint(Vector2 position) {
 		return grid[(int)position.x, (int)position.y];
 	}
+
+	public void definirNoeudMarchable(Vector2 position, bool marchable) {
+		grid[(int) position.x, (int) position.y].walkable = marchable;
+	}
 }

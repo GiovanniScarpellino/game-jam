@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 50310026390897920}
   - component: {fileID: 114476618935839396}
   - component: {fileID: 114625900450900710}
+  - component: {fileID: 114305904324346830}
   m_Layer: 0
   m_Name: Joueur
   m_TagString: Player
@@ -160,6 +161,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114305904324346830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1155500468480012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3f811779b85144192ec57d125c4f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arbre: {fileID: 1848243665526090, guid: 39b593a3a9c74ef4aa01d549b380a245, type: 2}
+  mapGenerator: {fileID: 0}
 --- !u!114 &114347348671042544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -238,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed6392610e1cfa4b994ca40dc91c1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathfinding: {fileID: 0}
   speed: 0
 --- !u!114 &114693469349821244
 MonoBehaviour:
@@ -306,7 +321,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1856421391
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300040, guid: 1ff342bb66637334093dcabbf9731589, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

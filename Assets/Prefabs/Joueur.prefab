@@ -175,6 +175,8 @@ MonoBehaviour:
   arbre: {fileID: 1848243665526090, guid: 39b593a3a9c74ef4aa01d549b380a245, type: 2}
   mapGenerator: {fileID: 114719591280243062, guid: 9c35cf29b92f4084895614c066868d35,
     type: 2}
+  couleurArbreSelectionnee: 0
+  animationArbre: {fileID: 0}
 --- !u!114 &114347348671042544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -248,7 +250,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1155500468480012}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ed6392610e1cfa4b994ca40dc91c1bf, type: 3}
   m_Name: 

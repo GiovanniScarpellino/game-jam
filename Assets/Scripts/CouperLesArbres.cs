@@ -39,6 +39,8 @@ public class CouperLesArbres : MonoBehaviour {
             if (Input.GetMouseButtonDown(0))
             {
                 tempsRestant = TEMPS_INITIAL;
+                arbreACouper.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
+                arbreACouper.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
                 couperArbre = true;
                 anim.Stop();
             }

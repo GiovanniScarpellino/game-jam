@@ -173,7 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arbre: {fileID: 1848243665526090, guid: 39b593a3a9c74ef4aa01d549b380a245, type: 2}
-  mapGenerator: {fileID: 0}
+  mapGenerator: {fileID: 114719591280243062, guid: 9c35cf29b92f4084895614c066868d35,
+    type: 2}
 --- !u!114 &114347348671042544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -252,8 +253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed6392610e1cfa4b994ca40dc91c1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathfinding: {fileID: 0}
-  speed: 0
 --- !u!114 &114693469349821244
 MonoBehaviour:
   m_ObjectHideFlags: 1

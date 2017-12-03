@@ -6,9 +6,6 @@ using UnityEngine;
 public class oPathFinding : MonoBehaviour{
     oGrille grid;
 
-    //Affichage du PathFinding
-    public bool refuserDiagonalesDansMur;
-
     void Awake(){
         grid = GetComponent<oGrille>();
     }
@@ -48,13 +45,12 @@ public class oPathFinding : MonoBehaviour{
                 if (!neighbour.walkable || closedSet.Contains(neighbour)){
                     continue;
                 }
+                
                 //Verification de la diagonale dans les murs
-                if (refuserDiagonalesDansMur){
-                    Vector2 differencePositionsVoisinSoi = (new Vector2(neighbour.gridX, neighbour.gridY) - new Vector2(node.gridX, node.gridY));
-                    if (!grid.NodeFromWorldPoint(new Vector2(node.gridX + differencePositionsVoisinSoi.x, node.gridY)).walkable ||
-                        !grid.NodeFromWorldPoint(new Vector2(node.gridX, node.gridY + differencePositionsVoisinSoi.y)).walkable)
-                        continue;
-                }
+                Vector2 differencePositionsVoisinSoi = (new Vector2(neighbour.gridX, neighbour.gridY) - new Vector2(node.gridX, node.gridY));
+                if (!grid.NodeFromWorldPoint(new Vector2(node.gridX + differencePositionsVoisinSoi.x, node.gridY)).walkable ||
+                    !grid.NodeFromWorldPoint(new Vector2(node.gridX, node.gridY + differencePositionsVoisinSoi.y)).walkable)
+                    continue;
 
                 //Verification des voisins
                 int newCostToNeighbour = node.gCost + GetDistance(node, neighbour);

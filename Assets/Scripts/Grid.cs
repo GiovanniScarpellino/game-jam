@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO.IsolatedStorage;
 using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEditor; //nécessaire pour modifier l'éditeur de unity
 
 [AddComponentMenu("Custom/Editor")] //va rattacher le script à un nouveau menu dans l'éditeur de unity
 

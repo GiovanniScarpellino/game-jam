@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CouperLesArbres : MonoBehaviour {
     public GameObject arbre;
-    public MapGenerator mapGenerator;
+    private MapGenerator mapGenerator;
+    private PlayerInfo playerInfo;
 
     private Vector3 vecteurDistance;
     private float distance;
@@ -21,6 +22,7 @@ public class CouperLesArbres : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         mapGenerator = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>();
+        playerInfo = Camera.main.GetComponent<PlayerInfo>();
 	}
 	
 	// Update is called once per frame
@@ -33,6 +35,7 @@ public class CouperLesArbres : MonoBehaviour {
                 couperArbre = true;
                 tempsRestant = 2f;
                 Destroy(arbreACouper);
+                playerInfo.ajoutBois();
                 GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<oPathFinding>().definirNoeudMarchable(arbreACouper.transform.position, true);
             }
             

@@ -114,11 +114,12 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	public GameObject arbreSurPosition(Vector2 position) {
-		foreach (GameObject positionArbre in listeArbres) {
-			if (position == new Vector2(positionArbre.transform.position.x, positionArbre.transform.position.y))
-				return positionArbre;
+        print(position);
+        foreach (GameObject arbre in listeArbres) {
+			if (position == new Vector2(arbre.transform.position.x, arbre.transform.position.y))
+				return arbre;
 		}
-		return null;
+        return null;
 	}
 
 	public TypeTuile tuileSurPosition(Vector2 position){

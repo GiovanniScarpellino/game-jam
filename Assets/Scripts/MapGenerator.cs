@@ -120,4 +120,8 @@ public class MapGenerator : MonoBehaviour {
 		}
 		return false;
 	}
+
+	public TypeTuile tuileSurPosition(Vector2 position){
+		return tuilesMap[(int) position.y, (int) position.x];
+	}
 }

@@ -7,31 +7,32 @@ public class SpawnPlayer : MonoBehaviour{
     public GameObject camp{ set; private get; }
     private bool joueurPlace;
     private GameObject parentDuSol;
-    private GameObject parentDesArbres;
 
     private List<Vector2> casesPossibles;
     private List<GameObject> uniteBlanches;
     public GameObject uniteBlanche{ set; private get; }
+
+    public GameObject mapGenerator;
 
     private void Start(){
         casesPossibles = new List<Vector2>();
         uniteBlanches = new List<GameObject>();
         joueur = Instantiate(joueur);
         parentDuSol = GameObject.Find("Parent du sol");
-        parentDesArbres = GameObject.Find("Parent des arbres");
         for (var i = 0; i < parentDuSol.transform.childCount; i++){
             var child = parentDuSol.transform.GetChild(i);
             if (child.position.x == camp.transform.position.x - 2 && child.position.y <= camp.transform.position.y + 2 && child.position.y >= camp.transform.position.y - 2
                 || child.position.x == camp.transform.position.x + 2 && child.position.y <= camp.transform.position.y + 2 && child.position.y >= camp.transform.position.y - 2
                 || child.position.x >= camp.transform.position.x - 2 && child.position.x <= camp.transform.position.x + 2 && child.position.y == camp.transform.position.y - 2
                 || child.position.x >= camp.transform.position.x - 2 && child.position.x <= camp.transform.position.x + 2 && child.position.y == camp.transform.position.y + 2){
-                casesPossibles.Add(child.position);
-                var uniteBlancheColore = Instantiate(uniteBlanche, child.transform.position, Quaternion.identity);
-                uniteBlancheColore.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 0.5f);
-                uniteBlanches.Add(uniteBlancheColore);
+                if (mapGenerator.GetComponent<MapGenerator>().tuileSurPosition(child.transform.position) != MapGenerator.TypeTuile.Eau){
+                    casesPossibles.Add(child.position);
+                    var uniteBlancheColore = Instantiate(uniteBlanche, child.transform.position, Quaternion.identity);
+                    uniteBlancheColore.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 0.5f);
+                    uniteBlanches.Add(uniteBlancheColore);
+                }
             }
         }
-        parentDesArbres.SetActive(false);
     }
 
     private void Update(){
@@ -41,6 +42,13 @@ public class SpawnPlayer : MonoBehaviour{
             positionJoueur.y = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).y + .5f);
             if (casesPossibles.Contains(positionJoueur)){
                 joueur.transform.position = positionJoueur;
+                if (Input.GetMouseButtonDown(0) && !joueurPlace){
+                    foreach (var uniteBlanche in uniteBlanches){
+                        Destroy(uniteBlanche);
+                    }
+                    Camera.main.GetComponent<CameraController>().enabled = true;
+                    joueurPlace = true;
+                }
             }
         } else{
             for (int i = 0; i < parentDuSol.transform.childCount; i++){
@@ -48,14 +56,8 @@ public class SpawnPlayer : MonoBehaviour{
                     parentDuSol.transform.GetChild(i).GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
                 }
             }
-        }
-        if (Input.GetMouseButtonDown(0)){
-            for (var i = 0; i < uniteBlanches.Capacity; i++){
-                Destroy(uniteBlanches[i]);
-            }
-            Camera.main.GetComponent<CameraController>().enabled = true;
+            joueur.GetComponent<PlayerController>().enabled = true;
             Destroy(this);
-            joueurPlace = true;
         }
     }
 }

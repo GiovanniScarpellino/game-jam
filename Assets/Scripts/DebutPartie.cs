@@ -140,6 +140,7 @@ public class DebutPartie : MonoBehaviour {
 					Destroy(this);
 					//Créé le script pour faire spawn le joueur
 					GetComponent<SpawnPlayer>().camp = campAPoser;
+					GetComponent<SpawnPlayer>().uniteBlanche = uniteBlanche;
 					GetComponent<SpawnPlayer>().enabled = true;
 				}
 				else {

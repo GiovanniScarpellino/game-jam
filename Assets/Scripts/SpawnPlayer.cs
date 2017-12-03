@@ -9,9 +9,12 @@ public class SpawnPlayer : MonoBehaviour{
     private GameObject parentDuSol;
 
     private List<Vector2> casesPossibles;
+    private List<GameObject> uniteBlanches;
+    public GameObject uniteBlanche{ set; private get; }
 
     private void Start(){
         casesPossibles = new List<Vector2>();
+        uniteBlanches = new List<GameObject>();
         joueur = Instantiate(joueur);
         parentDuSol = GameObject.Find("Parent du sol");
         for (var i = 0; i < parentDuSol.transform.childCount; i++){
@@ -21,7 +24,9 @@ public class SpawnPlayer : MonoBehaviour{
                 || child.position.x >= camp.transform.position.x - 2 && child.position.x <= camp.transform.position.x + 2 && child.position.y == camp.transform.position.y - 2
                 || child.position.x >= camp.transform.position.x - 2 && child.position.x <= camp.transform.position.x + 2 && child.position.y == camp.transform.position.y + 2){
                 casesPossibles.Add(child.position);
-                child.GetComponent<SpriteRenderer>().color = new Color(0, 160, 255);
+                var uniteBlancheColore = Instantiate(uniteBlanche, child.transform.position, Quaternion.identity);
+                uniteBlancheColore.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 130);
+                uniteBlanches.Add(uniteBlancheColore);
             }
         }
     }
@@ -42,6 +47,9 @@ public class SpawnPlayer : MonoBehaviour{
             }
         }
         if (Input.GetMouseButtonDown(0)){
+            for (int i = 0; i < uniteBlanches.Capacity; i++){
+                Destroy(uniteBlanches[i]);
+            }
             joueurPlace = true;
         }
     }

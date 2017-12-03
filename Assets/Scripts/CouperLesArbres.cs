@@ -21,18 +21,17 @@ public class CouperLesArbres : MonoBehaviour {
             Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouse.x = Mathf.Floor(mouse.x + 0.5f);
             mouse.y = Mathf.Floor(mouse.y + 0.5f);
-            print(mapGenerator.arbreSurPosition(mouse));
-            if (mapGenerator.arbreSurPosition(mouse))
+            if (mapGenerator.arbreSurPosition(mouse) != null)
             {
-                print("J'ai touché");
                 distance = 0f;
                 vecteurDistance = this.gameObject.transform.position - new Vector3(mouse.x, mouse.y, 0);
                 distance = vecteurDistance.magnitude;
-                distance = Mathf.Floor(distance - 0.5f);
+                distance = Mathf.Floor(distance + 0.5f);
                 print("distance : " + distance);
                 if (distance <= 1)
                 {
-                    print(distance);
+                    GameObject arbre = mapGenerator.arbreSurPosition(mouse);
+                    //arbre.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("", typeof(Sprite)) as Sprite;
                 }
             }
         }

@@ -14,7 +14,6 @@ public class oPathFinding : MonoBehaviour{
     }
 
     public List<Vector2> FindPath(Vector2 startPos, Vector2 targetPos){
-        print("Je passe ici");
         oNoeud startNode = grid.NodeFromWorldPoint(startPos);
         oNoeud targetNode = grid.NodeFromWorldPoint(targetPos);
 

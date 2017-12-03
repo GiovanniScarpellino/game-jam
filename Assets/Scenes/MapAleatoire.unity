@@ -314,4 +314,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joueur: {fileID: 1155500468480012, guid: 41397fd339011114590aa6b1ed19b72a, type: 2}
-  mapGenerator: {fileID: 952037662}
+  mapGenerator: {fileID: 1479617826}
+--- !u!1 &1479617826 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1809680943722558, guid: 9c35cf29b92f4084895614c066868d35,
+    type: 2}
+  m_PrefabInternal: {fileID: 196738112}

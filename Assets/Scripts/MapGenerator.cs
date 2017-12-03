@@ -114,9 +114,10 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	public GameObject arbreSurPosition(Vector2 position) {
-		foreach (GameObject positionArbre in listeArbres) {
-			if (position == new Vector2(positionArbre.transform.position.x, positionArbre.transform.position.y))
-				return positionArbre;
+		for (int i = 0; i < parentArbres.childCount; i++) {
+			Vector3 positionArbre = parentArbres.GetChild(i).transform.position;
+			if (position == new Vector2(positionArbre.x, positionArbre.y))
+				return parentArbres.GetChild(i).gameObject;
 		}
 		return null;
 	}

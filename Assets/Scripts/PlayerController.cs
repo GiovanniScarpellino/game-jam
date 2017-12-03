@@ -5,8 +5,8 @@ using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour{
-    public List<Vector2> pathPoint;
-    private int currentPathPoint; //point courant du chemin que nous tentons de rejoindre
+    public List<Vector2> pathPoint{ set; get; }
+    public int currentPathPoint{ set; private get; }
 
     private const float VITESSE = 5f;
     private Rigidbody2D body;
@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour{
     private float timer;
 
     private GameObject mapGenerator;
-    private bool enDeplacement;
+    public bool enDeplacement{ set; private get; }
     private Vector2 mousePosition;
 
     // Use this for initialization
@@ -26,13 +26,47 @@ public class PlayerController : MonoBehaviour{
     // Update is called once per frame
     private void Update(){
         if (Input.GetMouseButton(0)){
-            currentPathPoint = 0;
-            enDeplacement = true;
             mousePosition = new Vector2(0, 0);
             mousePosition.x = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + .5f);
             mousePosition.y = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).y + .5f);
-            pathPoint = mapGenerator.GetComponent<oPathFinding>().FindPath(new Vector2(Mathf.Floor(transform.position.x + 0.5f), Mathf.Floor(transform.position.y + 0.5f)), mousePosition);
+            enDeplacement = true;
+            currentPathPoint = 0;
+            pathPoint = trouverChemin(mousePosition);
         }
+        
+        //PathFinding vers Arbre
+        if (Input.GetMouseButtonDown(1)){
+            mousePosition = new Vector2();
+            mousePosition.x = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + .5f);
+            mousePosition.y = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).y + .5f);
+            enDeplacement = true;
+            currentPathPoint = 0;
+            pathPoint = trouverChemin(mousePosition);
+            
+            //Position la plus proche vers l'arbre sans diagonales
+            if (mapGenerator.GetComponent<MapGenerator>().arbreSurPosition(mousePosition) != null  && (mousePosition - new Vector2(transform.position.x, transform.position.y)).magnitude > 1.2){
+                int distanceMinimum = 9999;
+                List<Vector2> meilleurChemin = new List<Vector2>();
+                for (int i = -1; i <= 1; i++){
+                    for (int j = -1; j <= 1; j++){
+                        if ((3 * (i + 1) + j + 1) % 2 == 1){
+                            Vector2 positionActuelle = new Vector2(mousePosition.x + i, mousePosition.y + j);
+                            if (positionActuelle.x >= 0 && positionActuelle.x < mapGenerator.GetComponent<MapGenerator>().largeur &&
+                                positionActuelle.y >= 0 && positionActuelle.y < mapGenerator.GetComponent<MapGenerator>().hauteur){
+                                List<Vector2> cheminTrouve = trouverChemin(positionActuelle);
+                                if (cheminTrouve.Count > 0 && cheminTrouve.Count < distanceMinimum){
+                                    distanceMinimum = cheminTrouve.Count;
+                                    meilleurChemin = cheminTrouve;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (meilleurChemin.Count != 0)
+                    pathPoint = meilleurChemin;   
+            }
+        }
+        
         if (enDeplacement){
             if (currentPathPoint < pathPoint.Count){
                 var target = pathPoint[currentPathPoint];
@@ -52,5 +86,9 @@ public class PlayerController : MonoBehaviour{
                 enDeplacement = false;
             }
         }
+    }
+
+    private List<Vector2> trouverChemin(Vector2 position){
+        return mapGenerator.GetComponent<oPathFinding>().FindPath(new Vector2(Mathf.Floor(transform.position.x + 0.5f), Mathf.Floor(transform.position.y + 0.5f)), position);
     }
 }

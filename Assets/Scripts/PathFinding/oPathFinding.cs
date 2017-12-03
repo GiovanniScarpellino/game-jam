@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class oPathFinding : MonoBehaviour{
     oGrille grid;
+    public GameObject uniteBlanche;
 
     void Awake(){
         grid = GetComponent<oGrille>();

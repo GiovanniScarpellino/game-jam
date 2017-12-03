@@ -50,6 +50,8 @@ public class SpawnPlayer : MonoBehaviour{
             for (int i = 0; i < uniteBlanches.Capacity; i++){
                 Destroy(uniteBlanches[i]);
             }
+            Destroy(this);
+            Camera.main.GetComponent<CameraController>().enabled = true;
             joueurPlace = true;
         }
     }

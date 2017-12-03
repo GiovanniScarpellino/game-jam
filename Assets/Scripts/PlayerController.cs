@@ -5,36 +5,53 @@ using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour{
+    private List<Vector2> pathPoint;
+    private int currentPathPoint; //point courant du chemin que nous tentons de rejoindre
+
+    private const float VITESSE = 5f;
+    private Rigidbody2D body;
+
+    private float timer;
+
     private GameObject mapGenerator;
+    private bool enDeplacement;
     private Vector2 mousePosition;
-
-    public float speed;
-    private List<Vector2> chemins;
-    private bool peutBouger;
-    private bool peutPasserALaCaseSuivant;
-
+    
+    // Use this for initialization
     private void Start(){
+        body = GetComponent<Rigidbody2D>(); //on récupère le rigidbody de notre ennemi
         mapGenerator = GameObject.Find("MapGenerator");
     }
 
+    // Update is called once per frame
     private void Update(){
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.x = Mathf.Floor(mousePosition.x + 0.5f);
-        mousePosition.y = Mathf.Floor(mousePosition.y + 0.5f);
         if (Input.GetMouseButtonDown(0)){
-            chemins = mapGenerator.GetComponent<oPathFinding>().FindPath(transform.position, mousePosition);
-            peutBouger = true;
+            enDeplacement = true;
+            mousePosition = new Vector2(0, 0);
+            mousePosition.x = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + .5f);
+            mousePosition.y = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).y + .5f);
+            pathPoint = mapGenerator.GetComponent<oPathFinding>().FindPath(transform.position, mousePosition);
         }
-        if (peutBouger){
-            var step = speed * Time.deltaTime;
-            for (var i = 0; i < chemins.Count; i++){
-                if (i == 0){
-                    transform.position = Vector2.MoveTowards(transform.position, chemins[0], step);
+        if (enDeplacement){
+            print(currentPathPoint + " " + pathPoint.Count);
+            if (currentPathPoint < pathPoint.Count){
+                var target = pathPoint[currentPathPoint];
+
+                var moveDirection = target - (Vector2) transform.position;
+                var velocity = body.velocity;
+
+                if (moveDirection.magnitude < .1){
+                    currentPathPoint++;
                 } else{
-                    transform.position = Vector2.MoveTowards(chemins[i - 1], chemins[i], step);
+                    velocity = moveDirection.normalized * VITESSE;
                 }
+
+                body.velocity = velocity;
+            } else{
+                body.velocity = Vector2.zero;
+                currentPathPoint = 0;
+                enDeplacement = false;
             }
-            peutBouger = false;
         }
     }
 }

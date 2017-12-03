@@ -12,13 +12,14 @@ public class SpawnPlayer : MonoBehaviour{
     private List<GameObject> uniteBlanches;
     public GameObject uniteBlanche{ set; private get; }
 
-    public GameObject mapGenerator;
+    private GameObject mapGenerator;
 
     private void Start(){
         casesPossibles = new List<Vector2>();
         uniteBlanches = new List<GameObject>();
         joueur = Instantiate(joueur);
         parentDuSol = GameObject.Find("Parent du sol");
+        mapGenerator = GameObject.Find("MapGenerator");
         for (var i = 0; i < parentDuSol.transform.childCount; i++){
             var child = parentDuSol.transform.GetChild(i);
             if (child.position.x == camp.transform.position.x - 2 && child.position.y <= camp.transform.position.y + 2 && child.position.y >= camp.transform.position.y - 2

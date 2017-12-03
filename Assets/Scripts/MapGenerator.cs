@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -45,7 +46,8 @@ public class MapGenerator : MonoBehaviour {
 	public TypeTuile[,] tuilesMap { get; private set; }
 	public List<Vector2> positionArbres { get; private set; }
 
-	private void Start() { //Utilise Update pour une mise a jour en temps réel
+	private void Start() {
+		//Création des parents des objets de la génération
 		if(parentSol != null)
 			Destroy(parentSol.gameObject);
 		parentSol = new GameObject("Parent du sol").transform;
@@ -53,13 +55,18 @@ public class MapGenerator : MonoBehaviour {
 			Destroy(parentArbres.gameObject);
 		parentArbres = new GameObject("Parent des arbres").transform;
 
+		//Création d'un seed pour la map
 		seed = Random.Range(0, 999999);
 		Random.InitState(seed);
 		
+		//Générer la map
 		tuilesMap = new TypeTuile[hauteur, largeur];
 		positionArbres = new List<Vector2>();
 		genererMap();
 		Camera.main.transform.position = new Vector3(largeur / 2f, hauteur / 2f, -10);
+		
+		//Creer la grille pour le pathFinding
+		GetComponent<oGrille>().CreateGrid();
 	}
 
 	public void genererMap() {

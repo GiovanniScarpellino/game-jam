@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Mime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FinDePartie : MonoBehaviour {
@@ -19,6 +20,6 @@ public class FinDePartie : MonoBehaviour {
 	}
 
 	private void RetourAuMenu() {
-		Application.LoadLevel("Menu");
+		SceneManager.LoadScene("Menu",LoadSceneMode.Single);
 	}
 }

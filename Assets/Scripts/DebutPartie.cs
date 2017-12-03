@@ -92,7 +92,7 @@ public class DebutPartie : MonoBehaviour {
 								if (mapGenerator.tuilesMap[(int) positionCamp.y + y, (int) positionCamp.x + x] == MapGenerator.TypeTuile.Eau)
 									positionValide = false;
 							}
-							catch (Exception exception) {
+							catch {
 								positionValide = false;
 							}
 						}
@@ -109,14 +109,30 @@ public class DebutPartie : MonoBehaviour {
 								if (mapGenerator.tuilesMap[(int) positionCamp.y + y, (int) positionCamp.x + x] == MapGenerator.TypeTuile.Eau)
 									positionValide = false;
 							}
-							catch (Exception exception) {
+							catch {
 								positionValide = false;
 							}
 						}
 					}
 					if (positionValide) {
+						//Pathfinding
+						oPathFinding pathFinding = GameObject.Find("MapGenerator").GetComponent<oPathFinding>();
 						//Détruit les arbres autours
 						campAPoser.transform.Find("ColliderPoseCamp").GetComponent<BoxCollider2D>().enabled = true;
+						//Indique au PathFinding les nouvelles zones marchables ou non
+						for (int i = -2; i <= 2; i++) {
+							for (int j = -2; j <= 2; j++) {
+								Vector2 positionVerification = new Vector2(campAPoser.transform.position.x + i, campAPoser.transform.position.y + j);
+								//Bordures autour du camp
+								if (i == -2 || i == 2 || j == -2 || j == 2) {
+									if (mapGenerator.arbreSurPosition(positionVerification))
+										pathFinding.definirNoeudMarchable(positionVerification, true);
+								}
+								else { //Intérieur du camp
+									pathFinding.definirNoeudMarchable(positionVerification, false);
+								}	
+							}
+						}
 						//Enlève la zone noir de visualisation de placement
 						Destroy(campAPoser.transform.Find(nomGameObjectPlacementBatiment).gameObject);
 						//Passe au prochain état du début de partie : Le zoom qui recentre sur le camp

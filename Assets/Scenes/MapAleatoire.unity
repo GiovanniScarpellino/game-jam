@@ -192,7 +192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointDepart: {x: 10, y: 10}
   refuserDiagonalesDansMur: 1
-  cheminPF: []
   uniteBlanc: {fileID: 1040504139527902, guid: eddc662a540ebf3479d92b446f94d9c6, type: 2}
 --- !u!1 &991604147
 GameObject:

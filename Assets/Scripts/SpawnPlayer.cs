@@ -7,7 +7,6 @@ public class SpawnPlayer : MonoBehaviour{
     public GameObject camp{ set; private get; }
     private bool joueurPlace;
     private GameObject parentDuSol;
-    public GameObject mapGenerator;
 
     private List<Vector2> casesPossibles;
     private List<GameObject> uniteBlanches;
@@ -24,12 +23,10 @@ public class SpawnPlayer : MonoBehaviour{
                 || child.position.x == camp.transform.position.x + 2 && child.position.y <= camp.transform.position.y + 2 && child.position.y >= camp.transform.position.y - 2
                 || child.position.x >= camp.transform.position.x - 2 && child.position.x <= camp.transform.position.x + 2 && child.position.y == camp.transform.position.y - 2
                 || child.position.x >= camp.transform.position.x - 2 && child.position.x <= camp.transform.position.x + 2 && child.position.y == camp.transform.position.y + 2){
-                if (mapGenerator.GetComponent<MapGenerator>().tuileSurPosition(child.transform.position) != MapGenerator.TypeTuile.Eau){
-                    casesPossibles.Add(child.position);
-                    var uniteBlancheColore = Instantiate(uniteBlanche, child.transform.position, Quaternion.identity);
-                    uniteBlancheColore.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 0.5f);
-                    uniteBlanches.Add(uniteBlancheColore);
-                }
+                casesPossibles.Add(child.position);
+                var uniteBlancheColore = Instantiate(uniteBlanche, child.transform.position, Quaternion.identity);
+                uniteBlancheColore.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 0.5f);
+                uniteBlanches.Add(uniteBlancheColore);
             }
         }
     }

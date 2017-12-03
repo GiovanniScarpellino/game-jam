@@ -138,6 +138,9 @@ public class DebutPartie : MonoBehaviour {
 					Camera.main.transform.position = new Vector3(positionFinaleZoom.x, positionFinaleZoom.y, -10);
 					//Suppression du script quand les phases du début sont toutes terminées
 					Destroy(this);
+					//Créé le script pour faire spawn le joueur
+					GetComponent<SpawnPlayer>().camp = campAPoser;
+					GetComponent<SpawnPlayer>().enabled = true;
 				}
 				else {
 					Camera.main.orthographicSize = dezoomMax - ((dezoomMax - startZoom) * valeurIncrementationZoom);

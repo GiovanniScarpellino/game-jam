@@ -26,9 +26,9 @@ public class DebutPartie : MonoBehaviour {
 
 	[Header("Deplacement caméra")]
 	public float vitesseCamera; //Vitesse de déplacement de la camera
-	public int nombreTuilesX;
-	public int nombreTuilesY;
 	public Vector2 offsetLimitesCamera; //Offset de la limite du déplacement de la caméra
+	private int nombreTuilesX;
+	private int nombreTuilesY;
 
 	private EtatDebutPartie etatDebutPartie; //Etat du début de la partie (Dezoom, choix de l'emplacement du camp, zoom)
 
@@ -126,17 +126,24 @@ public class DebutPartie : MonoBehaviour {
 				break;
 			//Zoom sur la cabane finale
 			case EtatDebutPartie.Zoom:
+				//On determine la position vers laquelle se diriger si le camp est près d'une limite de la map
+				Vector3 positionFinaleZoom = campAPoser.transform.position;
+				positionFinaleZoom.x = Mathf.Clamp(positionFinaleZoom.x, 8.5f, nombreTuilesX - 9.5f);
+				positionFinaleZoom.y = Mathf.Clamp(positionFinaleZoom.y, 4.5f, nombreTuilesY - 5.5f);
+				//Incrementation du zoom
 				float valeurIncrementationZoom = sigmoid(etatZoom);
 				etatZoom += incrementationZooms * Time.deltaTime;
 				if (etatZoom >= 1) {
 					Camera.main.orthographicSize = startZoom;
-					Camera.main.transform.position = new Vector3(campAPoser.transform.position.x, campAPoser.transform.position.y, -10);
+					Camera.main.transform.position = new Vector3(positionFinaleZoom.x, positionFinaleZoom.y, -10);
+					//Suppression du script quand les phases du début sont toutes terminées
+					Destroy(this);
 				}
 				else {
 					Camera.main.orthographicSize = dezoomMax - ((dezoomMax - startZoom) * valeurIncrementationZoom);
 					Camera.main.transform.position = new Vector3(
-						startZoomCameraPosition.x + ((campAPoser.transform.position.x - startZoomCameraPosition.x) * valeurIncrementationZoom),
-						startZoomCameraPosition.y + ((campAPoser.transform.position.y - startZoomCameraPosition.y) * valeurIncrementationZoom),
+						startZoomCameraPosition.x + ((positionFinaleZoom.x - startZoomCameraPosition.x) * valeurIncrementationZoom),
+						startZoomCameraPosition.y + ((positionFinaleZoom.y - startZoomCameraPosition.y) * valeurIncrementationZoom),
 						-10
 					);
 				}

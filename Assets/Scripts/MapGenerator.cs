@@ -43,6 +43,7 @@ public class MapGenerator : MonoBehaviour {
 	private Transform parentArbres;
 
 	public TypeTuile[,] tuilesMap { get; private set; }
+	public List<Vector2> positionArbres { get; private set; }
 
 	private void Start() { //Utilise Update pour une mise a jour en temps réel
 		if(parentSol != null)
@@ -56,6 +57,7 @@ public class MapGenerator : MonoBehaviour {
 		Random.InitState(seed);
 		
 		tuilesMap = new TypeTuile[hauteur, largeur];
+		positionArbres = new List<Vector2>();
 		genererMap();
 		Camera.main.transform.position = new Vector3(largeur / 2f, hauteur / 2f, -10);
 	}
@@ -96,9 +98,18 @@ public class MapGenerator : MonoBehaviour {
 						GameObject nouvelArbre = Instantiate(prefabArbre);
 						nouvelArbre.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);
 						nouvelArbre.transform.parent = parentArbres;
+						positionArbres.Add(new Vector2(x, y));
 					}
 				}
 			}
 		}
+	}
+
+	public bool arbreSurPosition(Vector2 position) {
+		foreach (Vector2 positionArbre in positionArbres) {
+			if (position == positionArbre)
+				return true;
+		}
+		return false;
 	}
 }

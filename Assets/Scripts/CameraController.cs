@@ -4,22 +4,19 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour{
-
     public float vitesseCamera;
     public Vector2 offsetLimitesCamera;
-    
-    private GameObject gameManager;
+
     private GameObject mapGenerator;
 
     private void Start(){
-        gameManager = GameObject.Find("GameManager");
         mapGenerator = GameObject.Find("MapGenerator");
     }
 
     private void Update(){
         var nombreTuilesX = mapGenerator.GetComponent<MapGenerator>().largeur;
         var nombreTuilesY = mapGenerator.GetComponent<MapGenerator>().hauteur;
-        
+
         Vector2 positionSouris = Input.mousePosition;
         Vector3 positionCamera = Camera.main.transform.position;
         if (positionSouris.x <= 0 && Camera.main.ScreenToWorldPoint(Vector3.zero).x >= -offsetLimitesCamera.x)

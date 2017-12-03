@@ -86,6 +86,8 @@ public class PlayerController : Controllers{
 
                 body.velocity = velocity;
             } else{
+                GetComponent<Animator>().SetTrigger("Idle");
+                GetComponent<AnimationController>().triggerActuel = "Idle";
                 body.velocity = Vector2.zero;
                 enDeplacement = false;
             }

@@ -6,11 +6,12 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour{
     private Animator animator;
     private Controllers controllers;
-    private string triggerActuel;
+    public string triggerActuel{ set; private get; }
 
     private void Start(){
         animator = GetComponent<Animator>();
-        triggerActuel = "Droite";
+        triggerActuel = "Idle";
+        animator.SetTrigger("Idle");
         if (GetComponent<EnnemiController>() != null){
             controllers = GetComponent<EnnemiController>();
         } else{

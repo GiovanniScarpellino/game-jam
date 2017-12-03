@@ -29,6 +29,8 @@ public class MapGenerator : MonoBehaviour {
 	public int hauteur;
 	public int seed;
 	public float scale;
+	public int offsetSeedArbre;
+	public float scaleArbre;
 
 	[Space]
 	[Header("Tuiles")]
@@ -77,7 +79,7 @@ public class MapGenerator : MonoBehaviour {
 				float valeurMaxEau = .35f;
 				float valeurMaxTerre = .55f;
 				
-				//Récupération de la valeur aléatoire
+				//Récupération de la valeur aléatoire pour la génération du terrain
 				float xCoord = ((float) x + seed) / largeur * scale ;
 				float yCoord = ((float) y + seed) / hauteur * scale;
 				float valeurPerlin = Mathf.PerlinNoise(xCoord, yCoord);
@@ -101,8 +103,11 @@ public class MapGenerator : MonoBehaviour {
 				
 				//Instantiation des arbres
 				if (valeurPerlin >= valeurMaxEau) {
-					float valeurMaxArbre = .3f;
-					if (Random.Range(0f, 1f) < valeurMaxArbre) {
+					//Récupération de la valeur aléatoire pour la génération des arbres
+					float xCoordArbre = ((float) x + seed + offsetSeedArbre) / largeur * scaleArbre ;
+					float yCoordArbre = ((float) y + seed + + offsetSeedArbre) / hauteur * scaleArbre;
+					float valeurPerlinArbre = Mathf.PerlinNoise(xCoordArbre, yCoordArbre);
+					if (valeurPerlinArbre > .55f) {
 						GameObject nouvelArbre = Instantiate(prefabArbre);
 						nouvelArbre.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);
 						nouvelArbre.transform.parent = parentArbres;

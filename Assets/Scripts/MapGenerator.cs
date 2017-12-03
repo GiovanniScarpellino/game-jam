@@ -44,7 +44,7 @@ public class MapGenerator : MonoBehaviour {
 	private Transform parentArbres;
 
 	public TypeTuile[,] tuilesMap { get; private set; }
-	public List<Vector2> positionArbres { get; private set; }
+	public List<GameObject> listeArbres { get; private set; }
 
 	private void Start() {
 		//Création des parents des objets de la génération
@@ -61,12 +61,13 @@ public class MapGenerator : MonoBehaviour {
 		
 		//Générer la map
 		tuilesMap = new TypeTuile[hauteur, largeur];
-		positionArbres = new List<Vector2>();
+		listeArbres = new List<GameObject>();
 		genererMap();
 		Camera.main.transform.position = new Vector3(largeur / 2f, hauteur / 2f, -10);
 		
 		//Creer la grille pour le pathFinding
-		GetComponent<oGrille>().CreateGrid();
+        if(GetComponent<oGrille>() != null)
+		    GetComponent<oGrille>().CreateGrid();
 	}
 
 	public void genererMap() {
@@ -105,19 +106,19 @@ public class MapGenerator : MonoBehaviour {
 						GameObject nouvelArbre = Instantiate(prefabArbre);
 						nouvelArbre.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);
 						nouvelArbre.transform.parent = parentArbres;
-						positionArbres.Add(new Vector2(x, y));
+						listeArbres.Add(nouvelArbre);
 					}
 				}
 			}
 		}
 	}
 
-	public bool arbreSurPosition(Vector2 position) {
-		foreach (Vector2 positionArbre in positionArbres) {
-			if (position == positionArbre)
-				return true;
+	public GameObject arbreSurPosition(Vector2 position) {
+		foreach (GameObject positionArbre in listeArbres) {
+			if (position == new Vector2(positionArbre.transform.position.x, positionArbre.transform.position.y))
+				return positionArbre;
 		}
-		return false;
+		return null;
 	}
 
 	public TypeTuile tuileSurPosition(Vector2 position){

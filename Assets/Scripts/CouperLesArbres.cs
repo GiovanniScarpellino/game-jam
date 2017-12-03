@@ -8,6 +8,13 @@ public class CouperLesArbres : MonoBehaviour {
 
     private Vector3 vecteurDistance;
     private float distance;
+    private float tempsRestant = 2.0f;
+    private bool couperArbre = true;
+    private GameObject arbreACouper;
+
+    public enum couleurArbre {blanc, bleu}
+    public couleurArbre couleurArbreSelectionnee = couleurArbre.blanc;
+    public Animation animationArbre;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +23,15 @@ public class CouperLesArbres : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetMouseButtonDown(1))
+        if (!couperArbre){
+            tempsRestant -= Time.deltaTime;
+            if (tempsRestant <= 0){
+                couperArbre = true;
+                tempsRestant = 2f;
+                Destroy(arbreACouper);
+            }
+        }
+        else if (Input.GetMouseButtonDown(1) && couperArbre)
         {
             Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouse.x = Mathf.Floor(mouse.x + 0.5f);
@@ -30,8 +45,10 @@ public class CouperLesArbres : MonoBehaviour {
                 print("distance : " + distance);
                 if (distance <= 1)
                 {
-                    GameObject arbre = mapGenerator.arbreSurPosition(mouse);
-                    //arbre.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("", typeof(Sprite)) as Sprite;
+                    couperArbre = false;
+                    arbreACouper = mapGenerator.arbreSurPosition(mouse);
+                    Animation anim = arbreACouper.gameObject.GetComponent<Animation>();
+                    anim.Play();
                 }
             }
         }

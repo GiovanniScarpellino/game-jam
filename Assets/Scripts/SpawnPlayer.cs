@@ -7,6 +7,7 @@ public class SpawnPlayer : MonoBehaviour{
     public GameObject camp{ set; private get; }
     private bool joueurPlace;
     private GameObject parentDuSol;
+    private GameObject parentDesArbres;
 
     private List<Vector2> casesPossibles;
     private List<GameObject> uniteBlanches;
@@ -17,6 +18,7 @@ public class SpawnPlayer : MonoBehaviour{
         uniteBlanches = new List<GameObject>();
         joueur = Instantiate(joueur);
         parentDuSol = GameObject.Find("Parent du sol");
+        parentDesArbres = GameObject.Find("Parent des arbres");
         for (var i = 0; i < parentDuSol.transform.childCount; i++){
             var child = parentDuSol.transform.GetChild(i);
             if (child.position.x == camp.transform.position.x - 2 && child.position.y <= camp.transform.position.y + 2 && child.position.y >= camp.transform.position.y - 2
@@ -29,6 +31,7 @@ public class SpawnPlayer : MonoBehaviour{
                 uniteBlanches.Add(uniteBlancheColore);
             }
         }
+        parentDesArbres.SetActive(false);
     }
 
     private void Update(){
@@ -47,11 +50,11 @@ public class SpawnPlayer : MonoBehaviour{
             }
         }
         if (Input.GetMouseButtonDown(0)){
-            for (int i = 0; i < uniteBlanches.Capacity; i++){
+            for (var i = 0; i < uniteBlanches.Capacity; i++){
                 Destroy(uniteBlanches[i]);
             }
-            Destroy(this);
             Camera.main.GetComponent<CameraController>().enabled = true;
+            Destroy(this);
             joueurPlace = true;
         }
     }

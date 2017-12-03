@@ -20,17 +20,21 @@ public class SpawnPlayer : MonoBehaviour{
         joueur = Instantiate(joueur);
         parentDuSol = GameObject.Find("Parent du sol");
         mapGenerator = GameObject.Find("MapGenerator");
-        for (var i = 0; i < parentDuSol.transform.childCount; i++){
-            var child = parentDuSol.transform.GetChild(i);
-            if (child.position.x == camp.transform.position.x - 2 && child.position.y <= camp.transform.position.y + 2 && child.position.y >= camp.transform.position.y - 2
-                || child.position.x == camp.transform.position.x + 2 && child.position.y <= camp.transform.position.y + 2 && child.position.y >= camp.transform.position.y - 2
-                || child.position.x >= camp.transform.position.x - 2 && child.position.x <= camp.transform.position.x + 2 && child.position.y == camp.transform.position.y - 2
-                || child.position.x >= camp.transform.position.x - 2 && child.position.x <= camp.transform.position.x + 2 && child.position.y == camp.transform.position.y + 2){
-                if (mapGenerator.GetComponent<MapGenerator>().tuileSurPosition(child.transform.position) != MapGenerator.TypeTuile.Eau){
-                    casesPossibles.Add(child.position);
-                    var uniteBlancheColore = Instantiate(uniteBlanche, child.transform.position, Quaternion.identity);
-                    uniteBlancheColore.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 0.5f);
-                    uniteBlanches.Add(uniteBlancheColore);
+
+        MapGenerator componentMapGenerator = mapGenerator.GetComponent<MapGenerator>();
+        for (int y = -2; y <= 2; y++) {
+            for (int x = -2; x <= 2; x++) {
+                if (y == -2 || y == 2 || x == -2 || x ==2) {
+                    Vector2 positionVerification = new Vector2(camp.transform.position.x + x, camp.transform.position.y + y);
+                    if (positionVerification.x >= 0 && positionVerification.x < componentMapGenerator.largeur &&
+                        positionVerification.y >= 0 && positionVerification.y < componentMapGenerator.hauteur &&
+                        componentMapGenerator.tuileSurPosition(positionVerification) != MapGenerator.TypeTuile.Eau) {
+                        casesPossibles.Add(positionVerification);
+                        var uniteBlancheColore = Instantiate(uniteBlanche, positionVerification, Quaternion.identity);
+                        uniteBlancheColore.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 0.5f);
+                        uniteBlancheColore.GetComponent<SpriteRenderer>().sortingLayerName = "PlacementJoueur";
+                        uniteBlanches.Add(uniteBlancheColore);
+                    }
                 }
             }
         }

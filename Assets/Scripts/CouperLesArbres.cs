@@ -8,9 +8,11 @@ public class CouperLesArbres : MonoBehaviour {
 
     private Vector3 vecteurDistance;
     private float distance;
-    private float tempsRestant = 2.0f;
+    private const float TEMPS_INITIAL = 2.0f;
+    private float tempsRestant = TEMPS_INITIAL;
     private bool couperArbre = true;
     private GameObject arbreACouper;
+    private Animation anim;
 
     public enum couleurArbre {blanc, bleu}
     public couleurArbre couleurArbreSelectionnee = couleurArbre.blanc;
@@ -23,12 +25,22 @@ public class CouperLesArbres : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!couperArbre){
+        if (!couperArbre)
+        {
             tempsRestant -= Time.deltaTime;
-            if (tempsRestant <= 0){
+            if (tempsRestant <= 0)
+            {
                 couperArbre = true;
                 tempsRestant = 2f;
                 Destroy(arbreACouper);
+                GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<oPathFinding>().definirNoeudMarchable(arbreACouper.transform.position, true);
+            }
+            
+            if (Input.GetMouseButtonDown(0))
+            {
+                tempsRestant = TEMPS_INITIAL;
+                couperArbre = true;
+                anim.Stop();
             }
         }
         else if (Input.GetMouseButtonDown(1) && couperArbre)
@@ -42,12 +54,11 @@ public class CouperLesArbres : MonoBehaviour {
                 vecteurDistance = this.gameObject.transform.position - new Vector3(mouse.x, mouse.y, 0);
                 distance = vecteurDistance.magnitude;
                 distance = Mathf.Floor(distance + 0.5f);
-                print("distance : " + distance);
                 if (distance <= 1)
                 {
                     couperArbre = false;
                     arbreACouper = mapGenerator.arbreSurPosition(mouse);
-                    Animation anim = arbreACouper.gameObject.GetComponent<Animation>();
+                    anim = arbreACouper.gameObject.GetComponent<Animation>();
                     anim.Play();
                 }
             }

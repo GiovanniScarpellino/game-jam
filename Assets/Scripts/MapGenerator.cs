@@ -36,9 +36,9 @@ public class MapGenerator : MonoBehaviour {
 	[Header("Tuiles")]
 	//Tuiles utilisées
 	public float tailleTuile;
-	public GameObject prefabTerre;
-	public GameObject prefabHerbe;
-	public GameObject prefabEau;
+	public GameObject[] prefabsTerre;
+	public GameObject[] prefabsHerbe;
+	public GameObject[] prefabsEau;
 	public GameObject prefabArbre;
 
 	//Parent des tuiles
@@ -87,15 +87,15 @@ public class MapGenerator : MonoBehaviour {
 				//Instantiation de la tuile du sol
 				GameObject nouvelleTuile;
 				if (valeurPerlin < valeurMaxEau) {
-					nouvelleTuile = Instantiate(prefabEau);
+					nouvelleTuile = Instantiate(prefabsEau[Random.Range(0, prefabsEau.Length)]);
 					tuilesMap[y, x] = TypeTuile.Eau;
 				}
 				else if (valeurPerlin < valeurMaxTerre) {
-					nouvelleTuile = Instantiate(prefabTerre);
+					nouvelleTuile = Instantiate(prefabsTerre[Random.Range(0, prefabsTerre.Length)]);
 					tuilesMap[y, x] = TypeTuile.Terre;
 				}
 				else {
-					nouvelleTuile = Instantiate(prefabHerbe);
+					nouvelleTuile = Instantiate(prefabsHerbe[Random.Range(0, prefabsHerbe.Length)]);
 					tuilesMap[y, x] = TypeTuile.Herbe;
 				}
 				nouvelleTuile.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);

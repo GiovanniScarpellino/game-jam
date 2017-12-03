@@ -107,7 +107,7 @@ public class MapGenerator : MonoBehaviour {
 					float xCoordArbre = ((float) x + seed + offsetSeedArbre) / largeur * scaleArbre ;
 					float yCoordArbre = ((float) y + seed + + offsetSeedArbre) / hauteur * scaleArbre;
 					float valeurPerlinArbre = Mathf.PerlinNoise(xCoordArbre, yCoordArbre);
-					if (valeurPerlinArbre > .55f) {
+					if (valeurPerlinArbre > .52f) {
 						GameObject nouvelArbre = Instantiate(prefabArbre);
 						nouvelArbre.transform.position = new Vector3(x * tailleTuile, y * tailleTuile);
 						nouvelArbre.transform.parent = parentArbres;

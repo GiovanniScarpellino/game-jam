@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour{
-    private List<Vector2> pathPoint;
+    public List<Vector2> pathPoint;
     private int currentPathPoint; //point courant du chemin que nous tentons de rejoindre
 
     private const float VITESSE = 5f;
@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour{
 
     // Update is called once per frame
     private void Update(){
-        if (Input.GetMouseButtonDown(0)){
+        if (Input.GetMouseButton(0)){
+            currentPathPoint = 0;
             enDeplacement = true;
             mousePosition = new Vector2(0, 0);
             mousePosition.x = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + .5f);
@@ -48,7 +49,6 @@ public class PlayerController : MonoBehaviour{
                 body.velocity = velocity;
             } else{
                 body.velocity = Vector2.zero;
-                currentPathPoint = 0;
                 enDeplacement = false;
             }
         }

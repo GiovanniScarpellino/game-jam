@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed6392610e1cfa4b994ca40dc91c1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  pathPoint: []
 --- !u!114 &114693469349821244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -321,7 +321,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1856421391
-  m_SortingLayer: 8
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300040, guid: 1ff342bb66637334093dcabbf9731589, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -362,7 +362,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 1856421391
+  m_SortingLayerID: -1051542995
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &224417802658539182

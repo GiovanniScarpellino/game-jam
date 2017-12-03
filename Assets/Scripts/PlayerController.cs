@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour{
     private GameObject mapGenerator;
     private bool enDeplacement;
     private Vector2 mousePosition;
-    
+
     // Use this for initialization
     private void Start(){
         body = GetComponent<Rigidbody2D>(); //on récupère le rigidbody de notre ennemi
@@ -30,10 +30,9 @@ public class PlayerController : MonoBehaviour{
             mousePosition = new Vector2(0, 0);
             mousePosition.x = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + .5f);
             mousePosition.y = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).y + .5f);
-            pathPoint = mapGenerator.GetComponent<oPathFinding>().FindPath(transform.position, mousePosition);
+            pathPoint = mapGenerator.GetComponent<oPathFinding>().FindPath(new Vector2(Mathf.Floor(transform.position.x + 0.5f), Mathf.Floor(transform.position.y + 0.5f)), mousePosition);
         }
         if (enDeplacement){
-            print(currentPathPoint + " " + pathPoint.Count);
             if (currentPathPoint < pathPoint.Count){
                 var target = pathPoint[currentPathPoint];
 

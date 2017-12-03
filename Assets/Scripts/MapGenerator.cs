@@ -66,7 +66,8 @@ public class MapGenerator : MonoBehaviour {
 		Camera.main.transform.position = new Vector3(largeur / 2f, hauteur / 2f, -10);
 		
 		//Creer la grille pour le pathFinding
-		GetComponent<oGrille>().CreateGrid();
+        if(GetComponent<oGrille>() != null)
+		    GetComponent<oGrille>().CreateGrid();
 	}
 
 	public void genererMap() {

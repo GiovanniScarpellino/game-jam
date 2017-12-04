@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnnemiSpawner : MonoBehaviour {
 
-	public GameObject uniteBlanche;
+	public GameObject prefabCampEnnemi;
 	private GameObject camp;
 	
 	public void spawnCampEnnemi(GameObject _camp) {
@@ -45,7 +45,6 @@ public class EnnemiSpawner : MonoBehaviour {
 			}
 		}
 
-		Instantiate(uniteBlanche).transform.position = meilleurePosition;
-		print(meilleurePosition);
+		Instantiate(prefabCampEnnemi).transform.position = meilleurePosition;
 	}
 }

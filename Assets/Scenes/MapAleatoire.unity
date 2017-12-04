@@ -219,6 +219,24 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c35cf29b92f4084895614c066868d35, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &213857257 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1809680943722558, guid: 9c35cf29b92f4084895614c066868d35,
+    type: 2}
+  m_PrefabInternal: {fileID: 196738112}
+--- !u!114 &213857262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 213857257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff0a85033a7a5d4892c73cd45a25e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabCampEnnemi: {fileID: 1506434254090006, guid: 6e2c0bf63759a0045aaae654be60ec77,
+    type: 2}
 --- !u!1 &255675017
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,10 +502,10 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

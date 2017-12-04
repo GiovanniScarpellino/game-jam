@@ -48,6 +48,7 @@ public class SpawnPlayer : MonoBehaviour{
             if (casesPossibles.Contains(positionJoueur)){
                 joueur.transform.position = positionJoueur;
                 if (Input.GetMouseButtonDown(0) && !joueurPlace){
+                    joueur.GetComponent<AnimationController>().triggerActuel = "Idle";
                     foreach (var uniteBlanche in uniteBlanches){
                         Destroy(uniteBlanche);
                     }

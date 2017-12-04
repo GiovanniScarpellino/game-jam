@@ -11,7 +11,7 @@ public class VisionEnnemi : MonoBehaviour{
 
     private void OnTriggerExit2D(Collider2D other){
         if (other.CompareTag("Player")){
-            transform.parent.GetComponent<EnnemiController>().targetAnimation = transform.parent.GetComponent<EnnemiController>().camp.position;
+            transform.parent.GetComponent<EnnemiController>().targetAnimation = transform.parent.GetComponent<EnnemiController>().positionCampAllie;
         }
     }
 }

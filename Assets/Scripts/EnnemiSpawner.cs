@@ -5,15 +5,69 @@ using UnityEngine;
 public class EnnemiSpawner : MonoBehaviour {
 
 	public GameObject prefabCampEnnemi;
-	private GameObject camp;
+	public GameObject prefabOrc;
 	
-	public void spawnCampEnnemi(GameObject _camp) {
-		camp = _camp;
+	private GameObject campAllie;
+	private GameObject campOrc;
+
+	private GameObject parentOrcs;
+
+	private bool debutVaguesEnnemie;
+	private bool spawnEnnemis;
+
+	public float tempsAvantDebutVagues;
+	public float frequenceSpawnEnnemi;
+	public float decrementationFrequenceSpawnEnnemi;
+	public float frequenceMinimumSpawnEnnemis;
+	private float compteurSpawnEnnemi;
+
+	public void Start() {
+		debutVaguesEnnemie = false;
+		spawnEnnemis = false;
+		
+		compteurSpawnEnnemi = 0;
+		
+		parentOrcs = new GameObject("Parent des orcs");
+	}
+
+	private void Update() {
+		//Compteur avant debut vagues ennemies
+		if (debutVaguesEnnemie) {
+			compteurSpawnEnnemi += Time.deltaTime;
+			if (compteurSpawnEnnemi >= tempsAvantDebutVagues) {
+				compteurSpawnEnnemi = 0;
+				spawnEnnemis = true;
+				debutVaguesEnnemie = false;
+			}
+		}
+		//Spawn des ennemis
+		if (spawnEnnemis) {
+			compteurSpawnEnnemi += Time.deltaTime;
+			if (compteurSpawnEnnemi >= frequenceSpawnEnnemi) {
+				//Remise à zéro du compteur
+				compteurSpawnEnnemi = 0;
+				//La fréquence de spawn des monstres augmente
+				if (frequenceSpawnEnnemi - decrementationFrequenceSpawnEnnemi <= frequenceMinimumSpawnEnnemis)
+					frequenceSpawnEnnemi = frequenceMinimumSpawnEnnemis;
+				else
+					frequenceSpawnEnnemi -= decrementationFrequenceSpawnEnnemi;
+				//Spawn des ennemis
+				GameObject nouvelOrc = Instantiate(prefabOrc);
+				nouvelOrc.transform.position = campOrc.transform.position;
+				nouvelOrc.transform.parent = parentOrcs.transform;
+				nouvelOrc.GetComponent<EnnemiController>().vitesse = 2;
+				nouvelOrc.GetComponent<EnnemiController>().trouverCheminOrc(campOrc.transform.position, campAllie.transform.position);
+			}
+		}
+	}
+
+	public void spawnCampEnnemi(GameObject _campAllie) {
+		campAllie = _campAllie;
 
 		oPathFinding pathFinding = GetComponent<oPathFinding>();
 		MapGenerator mapGenerator = GetComponent<MapGenerator>();
 		
-		Vector2 positionCamp = new Vector2(camp.transform.position.x, camp.transform.position.y);
+		Vector2 positionCamp = new Vector2(campAllie.transform.position.x, campAllie.transform.position.y);
 
 		Vector2 meilleurePosition = new Vector2();
 		int longueurMeilleurePosition = 0;
@@ -46,13 +100,13 @@ public class EnnemiSpawner : MonoBehaviour {
 		}
 
 		//Instantiation du camp ennemi
-		GameObject baseEnnemie = Instantiate(prefabCampEnnemi);
-		baseEnnemie.transform.position = meilleurePosition;
+		campOrc = Instantiate(prefabCampEnnemi);
+		campOrc.transform.position = meilleurePosition;
 		
 		//Suppresion des arbres alentours sur la grille du path finding
 		for (int i = -2; i <= 2; i++) {
 			for (int j = -2; j <= 2; j++) {
-				Vector2 positionVerification = new Vector2(baseEnnemie.transform.position.x + i, baseEnnemie.transform.position.y + j);
+				Vector2 positionVerification = new Vector2(campOrc.transform.position.x + i, campOrc.transform.position.y + j);
 				//Bordures autour du camp
 				if (i == -2 || i == 2 || j == -2 || j == 2) {
 					if (mapGenerator.arbreSurPosition(positionVerification))
@@ -63,5 +117,8 @@ public class EnnemiSpawner : MonoBehaviour {
 				}	
 			}
 		}
+		
+		//Debut de l'instantiation des ennemis
+		debutVaguesEnnemie = true;
 	}
 }

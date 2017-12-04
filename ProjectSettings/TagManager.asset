@@ -73,6 +73,9 @@ TagManager:
   - name: Muraille
     uniqueID: 3631202257
     locked: 0
+  - name: Orc
+    uniqueID: 1377609303
+    locked: 0
   - name: UI
     uniqueID: 3243424301
     locked: 0

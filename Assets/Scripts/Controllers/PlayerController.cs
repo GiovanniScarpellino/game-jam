@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour{
+public class PlayerController : Controllers{
     public List<Vector2> pathPoint{ set; get; }
     public int currentPathPoint{ set; private get; }
 
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour{
             currentPathPoint = 0;
             pathPoint = trouverChemin(mousePosition);
         }
-        
+
         //PathFinding vers Arbre
         if (Input.GetMouseButtonDown(1)){
             mousePosition = new Vector2();
@@ -41,9 +41,9 @@ public class PlayerController : MonoBehaviour{
             enDeplacement = true;
             currentPathPoint = 0;
             pathPoint = trouverChemin(mousePosition);
-            
+
             //Position la plus proche vers l'arbre sans diagonales
-            if (mapGenerator.GetComponent<MapGenerator>().arbreSurPosition(mousePosition) != null  && (mousePosition - new Vector2(transform.position.x, transform.position.y)).magnitude > 1.2){
+            if (mapGenerator.GetComponent<MapGenerator>().arbreSurPosition(mousePosition) != null && (mousePosition - new Vector2(transform.position.x, transform.position.y)).magnitude > 1.2){
                 int distanceMinimum = 9999;
                 List<Vector2> meilleurChemin = new List<Vector2>();
                 for (int i = -1; i <= 1; i++){
@@ -62,12 +62,17 @@ public class PlayerController : MonoBehaviour{
                     }
                 }
                 if (meilleurChemin.Count != 0)
-                    pathPoint = meilleurChemin;   
+                    pathPoint = meilleurChemin;
             }
         }
-        
+
         if (enDeplacement){
             if (currentPathPoint < pathPoint.Count){
+                try{
+                    targetAnimation = pathPoint[currentPathPoint + 1];
+                } catch{
+                    targetAnimation = pathPoint[currentPathPoint];
+                }
                 var target = pathPoint[currentPathPoint];
 
                 var moveDirection = target - (Vector2) transform.position;
@@ -81,6 +86,8 @@ public class PlayerController : MonoBehaviour{
 
                 body.velocity = velocity;
             } else{
+                GetComponent<Animator>().SetTrigger("Idle");
+                GetComponent<AnimationController>().triggerActuel = "Idle";
                 body.velocity = Vector2.zero;
                 enDeplacement = false;
             }

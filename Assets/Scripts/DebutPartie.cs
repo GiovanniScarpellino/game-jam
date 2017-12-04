@@ -129,7 +129,7 @@ public class DebutPartie : MonoBehaviour {
 										pathFinding.definirNoeudArbre(positionVerification, false);
 								}
 								else { //Intérieur du camp
-									pathFinding.definirNoeudMarchable(positionVerification, false);
+									pathFinding.definirNoeudArbre(positionVerification, true);
 								}	
 							}
 						}

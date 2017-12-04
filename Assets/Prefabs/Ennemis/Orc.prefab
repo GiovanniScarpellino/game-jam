@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4738213417546190}
   - component: {fileID: 212755531255295046}
   - component: {fileID: 58930535746209078}
+  - component: {fileID: 95217103133023612}
   m_Layer: 0
   m_Name: Orc
   m_TagString: Ennemi
@@ -102,6 +103,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!95 &95217103133023612
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1925953100899926}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8ba2dc0f1281d0f44bf8ba2471f4ac6e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114903022872259018
 MonoBehaviour:
   m_ObjectHideFlags: 1

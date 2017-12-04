@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1ff342bb66637334093dcabbf9731589
-timeCreated: 1512343859
+timeCreated: 1512346350
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -31,6 +31,15 @@ TextureImporter:
     21300048: PersonnagePrincipaleMarcheBas5
     21300050: PersonnagePrincipaleIdle1
     21300052: PersonnagePrincipaleIdle2
+    21300054: PersonnagePrincipaleMort1
+    21300056: PersonnagePrincipaleMort2
+    21300058: PersonnagePrincipaleMort2
+    21300060: PersonnagePrincipaleMort4
+    21300062: PersonnagePrincipaleMort5
+    21300064: PersonnagePrincipaleMort6
+    21300066: Personnage Principale_0
+    21300068: Personnage Principale_1
+    21300070: PersonnagePrincipaleMort3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -499,6 +508,76 @@ TextureImporter:
         height: 46
       alignment: 9
       pivot: {x: 0.5, y: 0.525}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMort1
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 56
+        width: 31
+        height: 46
+      alignment: 9
+      pivot: {x: 0.5257817, y: 0.37837783}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMort2
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 49
+        width: 37
+        height: 47
+      alignment: 9
+      pivot: {x: 0.43519717, y: 0.4036388}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Personnage Principale_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 56
+        width: 31
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Personnage Principale_1
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 49
+        width: 37
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PersonnagePrincipaleMort3
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 57
+        width: 40
+        height: 34
+      alignment: 9
+      pivot: {x: 0.39829484, y: 0.49999955}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

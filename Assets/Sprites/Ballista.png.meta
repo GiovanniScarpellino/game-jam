@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 96ee537174faa9743995ad6f516e56f1
-timeCreated: 1512345675
+guid: eaf67ac4865ba054c9bafd2429360979
+timeCreated: 1512355861
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: CampEnnemi
+    21300000: Ballista
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CampEnnemi
+      name: Ballista
       rect:
         serializedVersion: 2
-        x: 398
-        y: 542
-        width: 128
-        height: 128
+        x: 3
+        y: 241
+        width: 58
+        height: 59
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

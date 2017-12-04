@@ -28,4 +28,10 @@ public class Vie : MonoBehaviour{
             doitAttendre = true;
         }
     }
+
+    public void perdreVie(int dommage){
+        vieActuel -= dommage;
+        foreground.sizeDelta = new Vector2(vieActuel / vieMax * 300, foreground.sizeDelta.y);
+        if (vieActuel == 0) Destroy(gameObject);
+    }
 }

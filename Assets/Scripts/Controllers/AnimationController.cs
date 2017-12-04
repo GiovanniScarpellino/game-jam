@@ -7,7 +7,6 @@ public class AnimationController : MonoBehaviour{
     private Animator animator;
     private Controllers controllers;
     public string triggerActuel{ set; private get; }
-    public bool pendantParcous{ set; private get; }
 
     private void Start(){
         animator = GetComponent<Animator>();
@@ -20,41 +19,22 @@ public class AnimationController : MonoBehaviour{
     }
 
     private void Update(){
-        if (pendantParcous){
-            var vecteurNormalized = (controllers.targetAnimation - (Vector2) transform.position).normalized;
-            var angle = Vector2.Angle(Vector2.right, vecteurNormalized);
-            if (vecteurNormalized.y > 0){
-                if (angle > 0 && angle <= 45 && triggerActuel != "Droite"){
-                    triggerActuel = "Droite";
-                    GetComponent<SpriteRenderer>().flipX = false;
-                    animator.SetTrigger("Droite");
-                } else if (angle > 45 && angle <= 135 && triggerActuel != "Haut"){
-                    triggerActuel = "Haut";
-                    animator.SetTrigger("Haut");
-                } else if (angle > 135 && angle <= 180 && triggerActuel != "Gauche"){
-                    triggerActuel = "Gauche";
-                    GetComponent<SpriteRenderer>().flipX = true;
-                    animator.SetTrigger("Droite");
-                }
-            } else{
-                if (angle > 0 && angle <= 45 && triggerActuel != "Droite"){
-                    triggerActuel = "Droite";
-                    GetComponent<SpriteRenderer>().flipX = false;
-                    animator.SetTrigger("Droite");
-                } else if (angle > 45 && angle <= 135 && triggerActuel != "Bas"){
-                    triggerActuel = "Bas";
-                    GetComponent<SpriteRenderer>().flipX = false;
-                    animator.SetTrigger("Bas");
-                } else if (angle > 135 && angle <= 180 && triggerActuel != "Gauche"){
-                    triggerActuel = "Gauche";
-                    GetComponent<SpriteRenderer>().flipX = true;
-                    animator.SetTrigger("Droite");
-                }
-            }
-        } else if(triggerActuel != "Idle"){
-            triggerActuel = "Idle";
-            animator.SetTrigger("Idle");
+        var vecteurNormalized = (controllers.targetAnimation - (Vector2) transform.position).normalized;
+        print(vecteurNormalized);
+        if (vecteurNormalized.x == 1){
+            triggerActuel = "Droite";
+            GetComponent<SpriteRenderer>().flipX = false;
+            animator.SetTrigger("Droite");
+        } else if (vecteurNormalized.x == -1){
+            triggerActuel = "Gauche";
+            GetComponent<SpriteRenderer>().flipX = true;
+            animator.SetTrigger("Droite");
+        } else if (vecteurNormalized.y == 1){
+            triggerActuel = "Haut";
+            animator.SetTrigger("Haut");
+        } else if (vecteurNormalized.y == -1){
+            triggerActuel = "Bas";
+            animator.SetTrigger("Bas");
         }
-        print(triggerActuel);
     }
 }

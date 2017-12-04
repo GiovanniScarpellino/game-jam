@@ -71,7 +71,6 @@ public class PlayerController : Controllers{
                 try{
                     targetAnimation = pathPoint[currentPathPoint + 1];
                 } catch{
-                    GetComponent<AnimationController>().pendantParcous = false;
                     targetAnimation = pathPoint[currentPathPoint];
                 }
                 var target = pathPoint[currentPathPoint];
@@ -94,7 +93,6 @@ public class PlayerController : Controllers{
     }
 
     private List<Vector2> trouverChemin(Vector2 position){
-        GetComponent<AnimationController>().pendantParcous = true;
         return mapGenerator.GetComponent<oPathFinding>().FindPath(new Vector2(Mathf.Floor(transform.position.x + 0.5f), Mathf.Floor(transform.position.y + 0.5f)), position, true);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 
 public class CouperLesArbres : MonoBehaviour {
@@ -74,6 +75,7 @@ public class CouperLesArbres : MonoBehaviour {
     }
 
     private void jouerSon() {
-        Camera.main.GetComponent<AudioSource>().Play();
+        AudioSource[] sons = Camera.main.GetComponents<AudioSource>();
+        sons[1].Play();
     }
 }

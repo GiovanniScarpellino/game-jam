@@ -45,6 +45,23 @@ public class EnnemiSpawner : MonoBehaviour {
 			}
 		}
 
-		Instantiate(prefabCampEnnemi).transform.position = meilleurePosition;
+		//Instantiation du camp ennemi
+		GameObject baseEnnemie = Instantiate(prefabCampEnnemi);
+		baseEnnemie.transform.position = meilleurePosition;
+		
+		//Suppresion des arbres alentours sur la grille du path finding
+		for (int i = -2; i <= 2; i++) {
+			for (int j = -2; j <= 2; j++) {
+				Vector2 positionVerification = new Vector2(baseEnnemie.transform.position.x + i, baseEnnemie.transform.position.y + j);
+				//Bordures autour du camp
+				if (i == -2 || i == 2 || j == -2 || j == 2) {
+					if (mapGenerator.arbreSurPosition(positionVerification))
+						pathFinding.definirNoeudArbre(positionVerification, false);
+				}
+				else { //Intérieur du camp
+					pathFinding.definirNoeudArbre(positionVerification, true);
+				}	
+			}
+		}
 	}
 }

@@ -37,7 +37,8 @@ public class PoserTourelle : MonoBehaviour {
 	}
 
 	public void poserTourelle() {
-		if (tourelleAPoser != null && joueurPoseTourelle) {
+		if (tourelleAPoser != null && joueurPoseTourelle && PlayerInfo.or >= 400) {
+			PlayerInfo.or -= 400;
 			tourelleAPoser.GetComponent<TourelleController>().enabled = true;
 			joueurPoseTourelle = false;
 		}

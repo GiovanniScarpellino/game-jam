@@ -2,21 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnnemiController : Controllers {
-
+public class EnnemiController : Controllers{
     public Vector2 positionCampOrc;
     public Vector2 positionCampAllie;
 
     public float vitesse;
-    
+
     public List<Vector2> cheminOrc;
     private int currentPathPoint;
 
     public GameObject allieCible;
-    
-    private Rigidbody2D body;
 
-    public void trouverCheminOrc(Vector2 _positionCampOrc, Vector2 _positionCampAllie) {
+    private Rigidbody2D body;
+    private GameObject camp;
+
+    private void Start(){
+        camp = GameObject.Find("Camp(Clone)");
+    }
+
+    public void trouverCheminOrc(Vector2 _positionCampOrc, Vector2 _positionCampAllie){
         positionCampAllie = _positionCampAllie;
         positionCampOrc = _positionCampOrc;
         body = GetComponent<Rigidbody2D>();
@@ -24,7 +28,7 @@ public class EnnemiController : Controllers {
         currentPathPoint = 0;
     }
 
-    public void trouverCheminOrcApresPerteJoueur() {
+    public void trouverCheminOrcApresPerteJoueur(){
         Vector2 positionOrc = transform.position;
         positionOrc.x = Mathf.Floor(positionOrc.x + .5f);
         positionOrc.y = Mathf.Floor(positionOrc.y + .5f);
@@ -33,29 +37,28 @@ public class EnnemiController : Controllers {
     }
 
     private void Update(){
-        if (allieCible == null) {
-            if (cheminOrc != null) {
-                if (currentPathPoint < cheminOrc.Count) {
+        if (allieCible == null){
+            if (cheminOrc != null){
+                if (currentPathPoint < cheminOrc.Count){
                     var target = cheminOrc[currentPathPoint];
 
                     var moveDirection = target - (Vector2) transform.position;
                     var velocity = body.velocity;
 
-                    if (moveDirection.magnitude < .1) {
+                    if (moveDirection.magnitude < .1){
                         currentPathPoint++;
-                    }
-                    else {
+                    } else{
                         velocity = moveDirection.normalized * vitesse;
                     }
 
                     body.velocity = velocity;
-                }
-                else {
+                } else{
                     body.velocity = Vector2.zero;
+                    Destroy(gameObject);
+                    camp.GetComponent<Vie>().perdreVie(1, gameObject);
                 }
             }
-        }
-        else {
+        } else{
             Vector2 moveDirection = (allieCible.transform.position - transform.position);
             Vector2 velocite = moveDirection.normalized * vitesse;
             body.velocity = velocite;

@@ -238,7 +238,7 @@ MonoBehaviour:
   prefabCampEnnemi: {fileID: 1506434254090006, guid: 6e2c0bf63759a0045aaae654be60ec77,
     type: 2}
   prefabOrc: {fileID: 1925953100899926, guid: cf11cd617abbe2c409a32e37cc7ddc56, type: 2}
-  tempsAvantDebutVagues: 10
+  tempsAvantDebutVagues: 1
   frequenceSpawnEnnemi: 3.5
   decrementationFrequenceSpawnEnnemi: 0.025
   frequenceMinimumSpawnEnnemis: 0.75

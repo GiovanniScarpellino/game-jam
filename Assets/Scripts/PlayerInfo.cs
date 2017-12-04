@@ -5,15 +5,14 @@ using UnityEngine;
 public class PlayerInfo : MonoBehaviour {
     private int nombreDeBois;
     private IU uI;
+    public static int score;
 
-    void start()
-    {
+    private void Start(){
+        score = 150;
         uI = Camera.main.GetComponent<IU>();
-        print("UI" + uI);
     }
 
-    public void ajoutBois()
-    {
+    public void ajoutBois(){
         uI = Camera.main.GetComponent<IU>();
         nombreDeBois += 100;
         uI.mettreAJourBois(nombreDeBois);

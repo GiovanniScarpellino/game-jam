@@ -12,21 +12,35 @@ public class EnnemiSpawner : MonoBehaviour {
 
 	private GameObject parentOrcs;
 
+	private bool debutVaguesEnnemie;
 	private bool spawnEnnemis;
 
+	public float tempsAvantDebutVagues;
 	public float frequenceSpawnEnnemi;
 	public float decrementationFrequenceSpawnEnnemi;
 	public float frequenceMinimumSpawnEnnemis;
 	private float compteurSpawnEnnemi;
 
 	public void Start() {
+		debutVaguesEnnemie = false;
 		spawnEnnemis = false;
+		
 		compteurSpawnEnnemi = 0;
 		
 		parentOrcs = new GameObject("Parent des orcs");
 	}
 
 	private void Update() {
+		//Compteur avant debut vagues ennemies
+		if (debutVaguesEnnemie) {
+			compteurSpawnEnnemi += Time.deltaTime;
+			if (compteurSpawnEnnemi >= tempsAvantDebutVagues) {
+				compteurSpawnEnnemi = 0;
+				spawnEnnemis = true;
+				debutVaguesEnnemie = false;
+			}
+		}
+		//Spawn des ennemis
 		if (spawnEnnemis) {
 			compteurSpawnEnnemi += Time.deltaTime;
 			if (compteurSpawnEnnemi >= frequenceSpawnEnnemi) {
@@ -105,6 +119,6 @@ public class EnnemiSpawner : MonoBehaviour {
 		}
 		
 		//Debut de l'instantiation des ennemis
-		spawnEnnemis = true;
+		debutVaguesEnnemie = true;
 	}
 }

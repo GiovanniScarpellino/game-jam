@@ -92,6 +92,12 @@ public class PlayerController : Controllers{
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D other){
+        if (other.gameObject.CompareTag("Ennemi")){
+            other.gameObject.GetComponent<Vie>().perdreVie(1, gameObject);
+        }
+    }
+
     private List<Vector2> trouverChemin(Vector2 position){
         return mapGenerator.GetComponent<oPathFinding>().FindPath(new Vector2(Mathf.Floor(transform.position.x + 0.5f), Mathf.Floor(transform.position.y + 0.5f)), position, true);
     }

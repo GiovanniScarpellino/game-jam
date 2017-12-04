@@ -39,7 +39,7 @@ public class CouperLesArbres : MonoBehaviour {
                 GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<oPathFinding>().definirNoeudArbre(arbreACouper.transform.position, false);
             }
             
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
             {
                 tempsRestant = TEMPS_INITIAL;
                 arbreACouper.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);

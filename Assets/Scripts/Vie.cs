@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Vie : MonoBehaviour{
     public float vieMax;
@@ -34,13 +35,20 @@ public class Vie : MonoBehaviour{
         vieActuel -= dommage;
         foreground.sizeDelta = new Vector2(vieActuel / vieMax * 300, foreground.sizeDelta.y);
         if (vieActuel == 0) Destroy(gameObject);
-    } 
-    
+    }
+
     public void perdreVie(int dommage, GameObject gameObject){
         vieActuel -= dommage;
         foreground.sizeDelta = new Vector2(vieActuel / vieMax * 300, foreground.sizeDelta.y);
         if (gameObject.CompareTag("Ennemi")){
-            if(vieActuel == 0) SceneManager.LoadScene("FinDePartie", LoadSceneMode.Single);
+            if (vieActuel == 0) SceneManager.LoadScene("FinDePartie", LoadSceneMode.Single);
+        }
+        if (gameObject.CompareTag("Player")){
+            if (vieActuel == 0){
+                Destroy(this.gameObject);
+                PlayerInfo.score++;
+                PlayerInfo.or += 100;
+            }
         }
     }
 }

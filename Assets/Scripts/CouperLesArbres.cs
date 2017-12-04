@@ -65,8 +65,15 @@ public class CouperLesArbres : MonoBehaviour {
                     arbreACouper = mapGenerator.arbreSurPosition(mouse);
                     anim = arbreACouper.gameObject.GetComponent<Animation>();
                     anim.Play();
+                    jouerSon();
+                    Invoke("jouerSon",0.9f);
+                    Invoke("jouerSon",1.8f);
                 }
             }
         }
+    }
+
+    private void jouerSon() {
+        Camera.main.GetComponent<AudioSource>().Play();
     }
 }

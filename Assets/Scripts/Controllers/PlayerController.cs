@@ -16,14 +16,30 @@ public class PlayerController : Controllers{
     public bool enDeplacement{ set; private get; }
     private Vector2 mousePosition;
 
+    private GameObject gameManager;
+
     // Use this for initialization
     private void Start(){
         body = GetComponent<Rigidbody2D>(); //on récupère le rigidbody de notre ennemi
         mapGenerator = GameObject.Find("MapGenerator");
+        gameManager = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
-    private void Update(){
+    private void Update() {
+        bool joueurPoseTourelle = gameManager.GetComponent<PoserTourelle>().joueurPoseTourelle;
+        if (!joueurPoseTourelle) {
+            deplacerJoueur();
+        }
+        else {
+            enDeplacement = false;
+            currentPathPoint = 0;
+            body.velocity = Vector2.zero;
+            pathPoint = new List<Vector2>();
+        }
+    }
+
+    private void deplacerJoueur() {
         if (Input.GetMouseButton(0)){
             mousePosition = new Vector2(0, 0);
             mousePosition.x = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + .5f);

@@ -916,6 +916,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textNombreDeBois: {fileID: 1102070242}
+  textNombreOr: {fileID: 2057731716}
+  textScore: {fileID: 1946190144}
 --- !u!82 &991604157
 AudioSource:
   m_ObjectHideFlags: 0

@@ -6,13 +6,8 @@ using UnityEngine.UI;
 
 public class IU : MonoBehaviour {
     public Text textNombreDeBois;
-	private Text textNombreOr;
-	private Text textScore;
-
-	private void Start(){
-		GameObject.Find("NombreOr");
-		GameObject.Find("NombreBois");
-	}
+	public Text textNombreOr;
+	public Text textScore;
 
 	// Update is called once per frame
 	void Update (){

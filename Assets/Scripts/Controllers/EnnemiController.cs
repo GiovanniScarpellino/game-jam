@@ -12,6 +12,8 @@ public class EnnemiController : Controllers {
     public List<Vector2> cheminOrc;
     private int currentPathPoint;
 
+    public GameObject allieCible;
+    
     private Rigidbody2D body;
 
     public void trouverCheminOrc(Vector2 _positionCampOrc, Vector2 _positionCampAllie) {
@@ -22,24 +24,41 @@ public class EnnemiController : Controllers {
         currentPathPoint = 0;
     }
 
+    public void trouverCheminOrcApresPerteJoueur() {
+        Vector2 positionOrc = transform.position;
+        positionOrc.x = Mathf.Floor(positionOrc.x + .5f);
+        positionOrc.y = Mathf.Floor(positionOrc.y + .5f);
+        cheminOrc = GameObject.Find("MapGenerator").GetComponent<oPathFinding>().FindPath(positionOrc, positionCampAllie, false);
+        currentPathPoint = 0;
+    }
+
     private void Update(){
-        if (cheminOrc != null) {
-            if (currentPathPoint < cheminOrc.Count){
-                var target = cheminOrc[currentPathPoint];
+        if (allieCible == null) {
+            if (cheminOrc != null) {
+                if (currentPathPoint < cheminOrc.Count) {
+                    var target = cheminOrc[currentPathPoint];
 
-                var moveDirection = target - (Vector2) transform.position;
-                var velocity = body.velocity;
+                    var moveDirection = target - (Vector2) transform.position;
+                    var velocity = body.velocity;
 
-                if (moveDirection.magnitude < .1){
-                    currentPathPoint++;
-                } else{
-                    velocity = moveDirection.normalized * vitesse;
+                    if (moveDirection.magnitude < .1) {
+                        currentPathPoint++;
+                    }
+                    else {
+                        velocity = moveDirection.normalized * vitesse;
+                    }
+
+                    body.velocity = velocity;
                 }
-
-                body.velocity = velocity;
-            } else{
-                body.velocity = Vector2.zero;
+                else {
+                    body.velocity = Vector2.zero;
+                }
             }
+        }
+        else {
+            Vector2 moveDirection = (allieCible.transform.position - transform.position);
+            Vector2 velocite = moveDirection.normalized * vitesse;
+            body.velocity = velocite;
         }
     }
 }

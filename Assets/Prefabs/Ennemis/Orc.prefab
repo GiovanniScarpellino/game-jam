@@ -94,7 +94,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58930535746209078
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -157,6 +157,7 @@ MonoBehaviour:
   positionCampAllie: {x: 0, y: 0}
   vitesse: 0
   cheminOrc: []
+  allieCible: {fileID: 0}
 --- !u!114 &114903022872259018
 MonoBehaviour:
   m_ObjectHideFlags: 1

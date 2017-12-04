@@ -5,6 +5,7 @@ using UnityEngine;
 public class oNoeud {
 	
 	public bool walkable;
+	public bool arbre;
 	public int gridX;
 	public int gridY;
 
@@ -12,8 +13,9 @@ public class oNoeud {
 	public int hCost;
 	public oNoeud parent;
 	
-	public oNoeud(bool _walkable, int _gridX, int _gridY) {
+	public oNoeud(bool _walkable, bool _arbre, int _gridX, int _gridY) {
 		walkable = _walkable;
+		arbre = _arbre;
 		gridX = _gridX;
 		gridY = _gridY;
 	}

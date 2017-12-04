@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class oPathFinding : MonoBehaviour{
-    oGrille grid;
+    public oGrille grid { get; private set; }
     public GameObject uniteBlanche;
 
     void Awake(){
         grid = GetComponent<oGrille>();
     }
 
-    public List<Vector2> FindPath(Vector2 startPos, Vector2 targetPos){
+    public List<Vector2> FindPath(Vector2 startPos, Vector2 targetPos, bool arbreBloque){
         oNoeud startNode = grid.NodeFromWorldPoint(startPos);
         oNoeud targetNode = grid.NodeFromWorldPoint(targetPos);
 
@@ -43,7 +43,7 @@ public class oPathFinding : MonoBehaviour{
 
             foreach (oNoeud neighbour in grid.GetNeighbours(node)){
                 //Verification du type de case
-                if (!neighbour.walkable || closedSet.Contains(neighbour)){
+                if (!neighbour.walkable || (arbreBloque && neighbour.arbre) || closedSet.Contains(neighbour)){
                     continue;
                 }
                 
@@ -51,6 +51,11 @@ public class oPathFinding : MonoBehaviour{
                 Vector2 differencePositionsVoisinSoi = (new Vector2(neighbour.gridX, neighbour.gridY) - new Vector2(node.gridX, node.gridY));
                 if (!grid.NodeFromWorldPoint(new Vector2(node.gridX + differencePositionsVoisinSoi.x, node.gridY)).walkable ||
                     !grid.NodeFromWorldPoint(new Vector2(node.gridX, node.gridY + differencePositionsVoisinSoi.y)).walkable)
+                    continue;
+                //Vérification des diagonale dans les murs si c'est un arbre dans la diagonale
+                if(arbreBloque && 
+                   (grid.NodeFromWorldPoint(new Vector2(node.gridX + differencePositionsVoisinSoi.x, node.gridY)).arbre ||
+                    grid.NodeFromWorldPoint(new Vector2(node.gridX, node.gridY + differencePositionsVoisinSoi.y)).arbre))
                     continue;
 
                 //Verification des voisins
@@ -91,5 +96,9 @@ public class oPathFinding : MonoBehaviour{
     
     public void definirNoeudMarchable(Vector2 position, bool marchable) {
         grid.definirNoeudMarchable(position, marchable);
+    }
+    
+    public void definirNoeudArbre(Vector2 position, bool arbre) {
+        grid.definirNoeudArbre(position, arbre);
     }
 }

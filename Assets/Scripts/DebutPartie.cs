@@ -126,7 +126,7 @@ public class DebutPartie : MonoBehaviour {
 								//Bordures autour du camp
 								if (i == -2 || i == 2 || j == -2 || j == 2) {
 									if (mapGenerator.arbreSurPosition(positionVerification))
-										pathFinding.definirNoeudMarchable(positionVerification, true);
+										pathFinding.definirNoeudArbre(positionVerification, false);
 								}
 								else { //Intérieur du camp
 									pathFinding.definirNoeudMarchable(positionVerification, false);
@@ -137,6 +137,8 @@ public class DebutPartie : MonoBehaviour {
 						Destroy(campAPoser.transform.Find(nomGameObjectPlacementBatiment).gameObject);
 						//Passe au prochain état du début de partie : Le zoom qui recentre sur le camp
 						etatDebutPartie = EtatDebutPartie.Zoom;
+						//Spawn le camp ennemi
+						GameObject.Find("MapGenerator").GetComponent<EnnemiSpawner>().spawnCampEnnemi(campAPoser);
 					}
 				}
 				break;
@@ -144,8 +146,8 @@ public class DebutPartie : MonoBehaviour {
 			case EtatDebutPartie.Zoom:
 				//On determine la position vers laquelle se diriger si le camp est près d'une limite de la map
 				Vector3 positionFinaleZoom = campAPoser.transform.position;
-				positionFinaleZoom.x = Mathf.Clamp(positionFinaleZoom.x, 8.5f, nombreTuilesX - 9.5f);
-				positionFinaleZoom.y = Mathf.Clamp(positionFinaleZoom.y, 4.5f, nombreTuilesY - 5.5f);
+				positionFinaleZoom.x = Mathf.Clamp(positionFinaleZoom.x, 10.5f, nombreTuilesX - 11f);
+				positionFinaleZoom.y = Mathf.Clamp(positionFinaleZoom.y, 5.5f, nombreTuilesY - 6.5f);
 				//Incrementation du zoom
 				float valeurIncrementationZoom = sigmoid(etatZoom);
 				etatZoom += incrementationZooms * Time.deltaTime;

@@ -36,7 +36,7 @@ public class CouperLesArbres : MonoBehaviour {
                 tempsRestant = 2f;
                 Destroy(arbreACouper);
                 playerInfo.ajoutBois();
-                GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<oPathFinding>().definirNoeudMarchable(arbreACouper.transform.position, true);
+                GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<oPathFinding>().definirNoeudArbre(arbreACouper.transform.position, false);
             }
             
             if (Input.GetMouseButtonDown(0))

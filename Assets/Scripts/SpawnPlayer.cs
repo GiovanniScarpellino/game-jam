@@ -31,7 +31,7 @@ public class SpawnPlayer : MonoBehaviour{
                         componentMapGenerator.tuileSurPosition(positionVerification) != MapGenerator.TypeTuile.Eau) {
                         casesPossibles.Add(positionVerification);
                         var uniteBlancheColore = Instantiate(uniteBlanche, positionVerification, Quaternion.identity);
-                        uniteBlancheColore.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 0.5f);
+                        uniteBlancheColore.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 0.3f);
                         uniteBlancheColore.GetComponent<SpriteRenderer>().sortingLayerName = "PlacementJoueur";
                         uniteBlanches.Add(uniteBlancheColore);
                     }

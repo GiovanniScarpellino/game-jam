@@ -93,6 +93,6 @@ public class PlayerController : Controllers{
     }
 
     private List<Vector2> trouverChemin(Vector2 position){
-        return mapGenerator.GetComponent<oPathFinding>().FindPath(new Vector2(Mathf.Floor(transform.position.x + 0.5f), Mathf.Floor(transform.position.y + 0.5f)), position);
+        return mapGenerator.GetComponent<oPathFinding>().FindPath(new Vector2(Mathf.Floor(transform.position.x + 0.5f), Mathf.Floor(transform.position.y + 0.5f)), position, true);
     }
 }

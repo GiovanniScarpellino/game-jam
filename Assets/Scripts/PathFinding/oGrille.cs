@@ -10,8 +10,9 @@ public class oGrille : MonoBehaviour {
 		grid = new oNoeud[mapGenerator.largeur,mapGenerator.hauteur];
 		for (int x = 0; x < mapGenerator.largeur; x ++) {
 			for (int y = 0; y < mapGenerator.hauteur; y ++) {
-				bool walkable = mapGenerator.tuilesMap[y, x] != MapGenerator.TypeTuile.Eau && mapGenerator.arbreSurPosition(new Vector2(x, y)) == null;
-				grid[x,y] = new oNoeud(walkable, x,y);
+				bool walkable = mapGenerator.tuilesMap[y, x] != MapGenerator.TypeTuile.Eau;
+				bool arbre = mapGenerator.arbreSurPosition(new Vector2(x, y)) != null;
+				grid[x,y] = new oNoeud(walkable, arbre, x,y);
 			}
 		}
 	}
@@ -43,5 +44,9 @@ public class oGrille : MonoBehaviour {
 
 	public void definirNoeudMarchable(Vector2 position, bool marchable) {
 		grid[(int) position.x, (int) position.y].walkable = marchable;
+	}
+	
+	public void definirNoeudArbre(Vector2 position, bool arbre) {
+		grid[(int) position.x, (int) position.y].arbre = arbre;
 	}
 }

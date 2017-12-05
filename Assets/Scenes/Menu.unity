@@ -276,7 +276,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1051542995
-  m_SortingLayer: 9
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 619394cfdf65af241a19d4c97b56cf03, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -588,26 +588,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af23138e80e88fd4a82adfd926ba4cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouttonJouer: {fileID: 1676984}
-  boutonQuitter: {fileID: 437461776}
-  sceneMapAleatoire: {fileID: 0}
---- !u!95 &461866955
-Animator:
-  serializedVersion: 3
+--- !u!111 &461866955
+Animation:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 461866948}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f1aa6e41a4fafcd4c80f77e51e3b51ab, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a16bc6a37baad6445ae2f79a88633723, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a16bc6a37baad6445ae2f79a88633723, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &505441485
 Prefab:
   m_ObjectHideFlags: 0

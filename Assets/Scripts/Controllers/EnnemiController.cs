@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnnemiController : Controllers{
+public class EnnemiController : MonoBehaviour{
     public Vector2 positionCampOrc;
     public Vector2 positionCampAllie;
 

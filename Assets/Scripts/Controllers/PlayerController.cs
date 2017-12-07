@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 
-public class PlayerController : Controllers{
+public class PlayerController : MonoBehaviour{
     public List<Vector2> pathPoint{ set; get; }
     public int currentPathPoint{ set; private get; }
 
@@ -17,6 +17,7 @@ public class PlayerController : Controllers{
     private Vector2 mousePosition;
 
     private GameObject gameManager;
+    private Vector2 derniereCase;
 
     // Use this for initialization
     private void Start(){
@@ -26,12 +27,11 @@ public class PlayerController : Controllers{
     }
 
     // Update is called once per frame
-    private void Update() {
+    private void Update(){
         bool joueurPoseTourelle = gameManager.GetComponent<PoserTourelle>().joueurPoseTourelle;
-        if (!joueurPoseTourelle) {
+        if (!joueurPoseTourelle){
             deplacerJoueur();
-        }
-        else {
+        } else{
             enDeplacement = false;
             currentPathPoint = 0;
             body.velocity = Vector2.zero;
@@ -39,7 +39,7 @@ public class PlayerController : Controllers{
         }
     }
 
-    private void deplacerJoueur() {
+    private void deplacerJoueur(){
         if (Input.GetMouseButton(0)){
             mousePosition = new Vector2(0, 0);
             mousePosition.x = Mathf.Floor(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + .5f);
@@ -84,12 +84,12 @@ public class PlayerController : Controllers{
 
         if (enDeplacement){
             if (currentPathPoint < pathPoint.Count){
-                try{
-                    targetAnimation = pathPoint[currentPathPoint + 1];
-                } catch{
-                    targetAnimation = pathPoint[currentPathPoint];
-                }
                 var target = pathPoint[currentPathPoint];
+
+                //Fait tourner le personnage en fonction de la case cible
+                var dir = target - (Vector2) transform.position;
+                var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+                GetComponent<Animator>().SetFloat("Rotation", Quaternion.AngleAxis(angle, Vector3.forward).z);
 
                 var moveDirection = target - (Vector2) transform.position;
                 var velocity = body.velocity;
@@ -101,9 +101,11 @@ public class PlayerController : Controllers{
                 }
 
                 body.velocity = velocity;
+                GetComponent<Animator>().SetBool("Bouge", true);
             } else{
                 body.velocity = Vector2.zero;
                 enDeplacement = false;
+                GetComponent<Animator>().SetBool("Bouge", false);
             }
         }
     }

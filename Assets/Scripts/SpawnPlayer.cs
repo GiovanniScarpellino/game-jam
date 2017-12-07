@@ -22,13 +22,13 @@ public class SpawnPlayer : MonoBehaviour{
         mapGenerator = GameObject.Find("MapGenerator");
 
         MapGenerator componentMapGenerator = mapGenerator.GetComponent<MapGenerator>();
-        for (int y = -2; y <= 2; y++) {
-            for (int x = -2; x <= 2; x++) {
-                if (y == -2 || y == 2 || x == -2 || x ==2) {
+        for (int y = -2; y <= 2; y++){
+            for (int x = -2; x <= 2; x++){
+                if (y == -2 || y == 2 || x == -2 || x == 2){
                     Vector2 positionVerification = new Vector2(camp.transform.position.x + x, camp.transform.position.y + y);
                     if (positionVerification.x >= 0 && positionVerification.x < componentMapGenerator.largeur &&
                         positionVerification.y >= 0 && positionVerification.y < componentMapGenerator.hauteur &&
-                        componentMapGenerator.tuileSurPosition(positionVerification) != MapGenerator.TypeTuile.Eau) {
+                        componentMapGenerator.tuileSurPosition(positionVerification) != MapGenerator.TypeTuile.Eau){
                         casesPossibles.Add(positionVerification);
                         var uniteBlancheColore = Instantiate(uniteBlanche, positionVerification, Quaternion.identity);
                         uniteBlancheColore.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 0.3f);
@@ -48,7 +48,6 @@ public class SpawnPlayer : MonoBehaviour{
             if (casesPossibles.Contains(positionJoueur)){
                 joueur.transform.position = positionJoueur;
                 if (Input.GetMouseButtonDown(0) && !joueurPlace){
-                    joueur.GetComponent<AnimationController>().triggerActuel = "Idle";
                     foreach (var uniteBlanche in uniteBlanches){
                         Destroy(uniteBlanche);
                     }

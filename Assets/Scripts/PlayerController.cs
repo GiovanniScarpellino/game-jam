@@ -19,29 +19,11 @@ public class PlayerController : MonoBehaviour{
 
     private GameObject gameManager;
 
-    private Animator animator;
-
-    private enum CurrentAnimation{
-        Droite,
-        Gauche,
-        Haut,
-        Bas,
-        DiagoHD,
-        DiagoHG,
-        DiagoBG,
-        DiagoBD,
-        Idle
-    }
-
-    private CurrentAnimation currentAnimation;
-
     // Use this for initialization
     private void Start(){
         body = GetComponent<Rigidbody2D>(); //on récupère le rigidbody de notre ennemi
         mapGenerator = GameObject.Find("MapGenerator");
         gameManager = GameObject.Find("GameManager");
-        animator = GetComponent<Animator>();
-        currentAnimation = CurrentAnimation.Idle;
     }
 
     // Update is called once per frame
@@ -55,6 +37,7 @@ public class PlayerController : MonoBehaviour{
             body.velocity = Vector2.zero;
             pathPoint = new List<Vector2>();
         }
+        GetComponent<AnimatorController>().enDeplacement = enDeplacement;
     }
 
     private void deplacerJoueur(){
@@ -113,32 +96,8 @@ public class PlayerController : MonoBehaviour{
                     dir = target - (Vector2) transform.position;
                 }
                 var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
-                
-                if (angle > -10 && angle < 10 && currentAnimation != CurrentAnimation.Haut){
-                    currentAnimation = CurrentAnimation.Haut;
-                    animator.SetTrigger(currentAnimation+"");
-                }else if (angle > -55 && angle < -35 && currentAnimation != CurrentAnimation.DiagoHD){
-                    currentAnimation = CurrentAnimation.DiagoHD;
-                    animator.SetTrigger(currentAnimation+"");
-                }else if (angle > -100 && angle < -80 && currentAnimation != CurrentAnimation.Droite){
-                    currentAnimation = CurrentAnimation.Droite;
-                    animator.SetTrigger(currentAnimation+"");
-                }else if (angle > -145 && angle < -125 && currentAnimation != CurrentAnimation.DiagoBD){
-                    currentAnimation = CurrentAnimation.DiagoBD;
-                    animator.SetTrigger(currentAnimation+"");
-                }else if (angle > -190 && angle < -170 && currentAnimation != CurrentAnimation.Bas){
-                    currentAnimation = CurrentAnimation.Bas;
-                    animator.SetTrigger(currentAnimation+"");
-                }else if (angle > -235 && angle < -215 && currentAnimation != CurrentAnimation.DiagoBG){
-                    currentAnimation = CurrentAnimation.DiagoBG;
-                    animator.SetTrigger(currentAnimation+"");
-                }else if (angle > 80 && angle < 100 && currentAnimation != CurrentAnimation.Gauche){
-                    currentAnimation = CurrentAnimation.Gauche;
-                    animator.SetTrigger(currentAnimation+"");
-                }else if (angle > 35 && angle < 55 && currentAnimation != CurrentAnimation.DiagoHG){
-                    currentAnimation = CurrentAnimation.DiagoHG;
-                    animator.SetTrigger(currentAnimation+"");
-                }
+
+                GetComponent<AnimatorController>().angle = angle;
 
                 var moveDirection = target - (Vector2) transform.position;
                 var velocity = body.velocity;
@@ -153,7 +112,6 @@ public class PlayerController : MonoBehaviour{
             } else{
                 body.velocity = Vector2.zero;
                 enDeplacement = false;
-                animator.SetTrigger(CurrentAnimation.Idle+"");
             }
         }
     }

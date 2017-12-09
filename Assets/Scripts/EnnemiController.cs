@@ -8,7 +8,7 @@ public class EnnemiController : MonoBehaviour{
 
     public float vitesse;
 
-    public List<Vector2> cheminOrc;
+    private List<Vector2> cheminOrc;
     private int currentPathPoint;
 
     public GameObject allieCible;
@@ -18,6 +18,7 @@ public class EnnemiController : MonoBehaviour{
 
     private void Start(){
         camp = GameObject.Find("Camp(Clone)");
+        GetComponent<AnimatorController>().enDeplacement = true;
     }
 
     public void trouverCheminOrc(Vector2 _positionCampOrc, Vector2 _positionCampAllie){
@@ -42,6 +43,16 @@ public class EnnemiController : MonoBehaviour{
                 if (currentPathPoint < cheminOrc.Count){
                     var target = cheminOrc[currentPathPoint];
 
+                    Vector2 dir;
+                    try{
+                        dir = target - cheminOrc[currentPathPoint - 1];
+                    } catch{
+                        dir = target - (Vector2) transform.position;
+                    }
+                    var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+
+                    GetComponent<AnimatorController>().angle = angle;
+                    
                     var moveDirection = target - (Vector2) transform.position;
                     var velocity = body.velocity;
 

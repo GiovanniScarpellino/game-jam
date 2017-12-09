@@ -62,6 +62,7 @@ public class SpawnPlayer : MonoBehaviour{
                 }
             }
             joueur.GetComponent<PlayerController>().enabled = true;
+            Camera.main.GetComponent<IconCursor>().enabled = true;
             Destroy(this);
         }
     }

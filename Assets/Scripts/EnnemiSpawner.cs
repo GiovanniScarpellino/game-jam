@@ -56,7 +56,7 @@ public class EnnemiSpawner : MonoBehaviour {
 				nouvelOrc.transform.position = campOrc.transform.position;
 				nouvelOrc.transform.parent = parentOrcs.transform;
 				nouvelOrc.GetComponent<EnnemiController>().vitesse = 2.35f;
-				nouvelOrc.GetComponent<EnnemiController>().trouverCheminOrc(campOrc.transform.position, campAllie.transform.position);
+				nouvelOrc.GetComponent<EnnemiController>().trouverCheminOrc(campAllie.transform.position);
 			}
 		}
 	}

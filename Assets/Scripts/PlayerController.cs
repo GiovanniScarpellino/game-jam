@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour{
 
     private float timer;
 
-    private GameObject mapGenerator;
+    public GameObject mapGenerator{ get; private set; }
     public bool enDeplacement{ set; private get; }
     private Vector2 mousePosition;
 

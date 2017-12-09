@@ -3,76 +3,79 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnnemiController : MonoBehaviour{
-    public Vector2 positionCampOrc;
     public Vector2 positionCampAllie;
-
     public float vitesse;
+    public bool suitJoueur{ set; private get; }
 
     private List<Vector2> cheminOrc;
     private int currentPathPoint;
-
-    public GameObject allieCible;
-
+    
     private Rigidbody2D body;
+    private GameObject mapGenerator;
+    private GameObject player;
     private GameObject camp;
 
     private void Start(){
         camp = GameObject.Find("Camp(Clone)");
         GetComponent<AnimatorController>().enDeplacement = true;
+        player = GameObject.Find("Joueur(Clone)");
+        body = GetComponent<Rigidbody2D>();
     }
 
-    public void trouverCheminOrc(Vector2 _positionCampOrc, Vector2 _positionCampAllie){
-        positionCampAllie = _positionCampAllie;
-        positionCampOrc = _positionCampOrc;
-        body = GetComponent<Rigidbody2D>();
-        cheminOrc = GameObject.Find("MapGenerator").GetComponent<oPathFinding>().FindPath(_positionCampOrc, _positionCampAllie, false);
+    public void trouverCheminOrc(Vector2 positionCampAllie){
+        mapGenerator = GameObject.Find("MapGenerator");
+        this.positionCampAllie = positionCampAllie;
+        cheminOrc = trouverChemin(positionCampAllie);
         currentPathPoint = 0;
     }
 
     public void trouverCheminOrcApresPerteJoueur(){
-        Vector2 positionOrc = transform.position;
-        positionOrc.x = Mathf.Floor(positionOrc.x + .5f);
-        positionOrc.y = Mathf.Floor(positionOrc.y + .5f);
-        cheminOrc = GameObject.Find("MapGenerator").GetComponent<oPathFinding>().FindPath(positionOrc, positionCampAllie, false);
+        cheminOrc = trouverChemin(positionCampAllie);
+        currentPathPoint = 0;
+    }
+
+    public void seDirigerVersLeJoueur(){
+        Vector2 position = new Vector2(Mathf.Floor(player.transform.position.x + 0.5f), Mathf.Floor(player.transform.position.y + 0.5f));
+        cheminOrc = trouverChemin(position);
         currentPathPoint = 0;
     }
 
     private void Update(){
-        if (allieCible == null){
-            if (cheminOrc != null){
-                if (currentPathPoint < cheminOrc.Count){
-                    var target = cheminOrc[currentPathPoint];
+        if (cheminOrc != null){
+            if (currentPathPoint < cheminOrc.Count){
+                var target = cheminOrc[currentPathPoint];
 
-                    Vector2 dir;
-                    try{
-                        dir = target - cheminOrc[currentPathPoint - 1];
-                    } catch{
-                        dir = target - (Vector2) transform.position;
-                    }
-                    var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+                Vector2 dir;
+                try{
+                    dir = target - cheminOrc[currentPathPoint - 1];
+                } catch{
+                    dir = target - (Vector2) transform.position;
+                }
+                var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
 
-                    GetComponent<AnimatorController>().angle = angle;
-                    
-                    var moveDirection = target - (Vector2) transform.position;
-                    var velocity = body.velocity;
+                GetComponent<AnimatorController>().angle = angle;
 
-                    if (moveDirection.magnitude < .1){
-                        currentPathPoint++;
-                    } else{
-                        velocity = moveDirection.normalized * vitesse;
-                    }
+                var moveDirection = target - (Vector2) transform.position;
+                var velocity = body.velocity;
 
-                    body.velocity = velocity;
+                if (moveDirection.magnitude < .1){
+                    currentPathPoint++;
                 } else{
-                    body.velocity = Vector2.zero;
+                    velocity = moveDirection.normalized * vitesse;
+                }
+
+                body.velocity = velocity;
+            } else{
+                body.velocity = Vector2.zero;
+                if (!suitJoueur){
                     Destroy(gameObject);
-                    camp.GetComponent<Vie>().perdreVie(1, gameObject);
+                    camp.GetComponent<Vie>().perdreVie(1, gameObject);   
                 }
             }
-        } else{
-            Vector2 moveDirection = (allieCible.transform.position - transform.position);
-            Vector2 velocite = moveDirection.normalized * vitesse;
-            body.velocity = velocite;
         }
+    }
+
+    private List<Vector2> trouverChemin(Vector2 position){
+        return mapGenerator.GetComponent<oPathFinding>().FindPath(new Vector2(Mathf.Floor(transform.position.x + 0.5f), Mathf.Floor(transform.position.y + 0.5f)), position, false);
     }
 }

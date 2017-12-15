@@ -8,12 +8,4 @@ public class DetectionCampSurArbre : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
-
-	private void OnMouseEnter(){
-		Camera.main.GetComponent<IconCursor>().afficherIconCursor(Icon.Hache);
-	}
-
-	private void OnMouseExit(){
-		Camera.main.GetComponent<IconCursor>().effacerIconCursor();
-	}
 }

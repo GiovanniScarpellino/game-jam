@@ -9,7 +9,6 @@ public class Menu : MonoBehaviour{
         Application.Quit();
     }
 
-
     public void jouer(){
         SceneManager.LoadScene("MapAleatoire", LoadSceneMode.Single);
     }
